@@ -1,6 +1,7 @@
 using api.Data;
 using api.Interfaces;
 using api.Repository;
+using api.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -22,9 +23,13 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+
 //Map the interfaces with its repo
 builder.Services.AddScoped<IArtPieceRepository, ArtPieceRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IHarvardMuseuemApiRepository, HarvardMuseumService>();
+builder.Services.AddHttpClient<IHarvardMuseuemApiRepository, HarvardMuseumService>();
 
 var app = builder.Build();
 

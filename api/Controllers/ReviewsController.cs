@@ -45,5 +45,21 @@ namespace api.Controllers
 
             return Ok(review.ToReviewDTO()); 
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteReview([FromRoute] int id){
+            var review = await _repoReview.DeleteReviewAsync(id);
+            if(review == null) return NotFound("No review found");
+            return NoContent();
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateReview([FromRoute] int id, UpdateReviewDTO reviewDTO){
+            var updatedReview = await _repoReview.UpdateReviewAsync(id, reviewDTO);
+            if(updatedReview ==null) return NotFound("No review found for update");
+
+            return Ok(updatedReview.ToReviewDTO());
+
+        }
     }
 }

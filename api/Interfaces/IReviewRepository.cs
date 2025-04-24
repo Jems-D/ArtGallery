@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.DTO.ArtPieceDTOS;
+using api.DTO.ReviewDTOS;
 using api.Models;
 
 namespace api.Interfaces
@@ -12,5 +13,7 @@ namespace api.Interfaces
         Task<Reviews> CreateReviewAsync(Reviews reviews);
         Task<List<Reviews>> GetAllReviewAsync();
         Task<Reviews> GetOneReviewAsync(int id);
+        Task<Reviews> DeleteReviewAsync(int id);
+        Task<Reviews> UpdateReviewAsync(int id, UpdateReviewDTO reviewDTO);
     }
 }
