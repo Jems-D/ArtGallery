@@ -11,5 +11,9 @@ namespace api.Interfaces
     {
          Task<ArtPiece> CreateArtPieceAsync(ArtPiece artPieceProperties);
          Task<List<ArtPiece>> GetAllArtPieceAsync();
+         Task<ArtPiece?> GetOneArtPieceAsync(int id);
+         Task<ArtPiece> UpdateArtPieceAsync(int id, UpdateArtPieceDTO artPieceDTO);
+         Task<ArtPiece> DeleteArtPieceAsync(int id);
+         Task<bool> DoesArtPieceExistAsync(int id);
     }
 }

@@ -21,11 +21,11 @@ namespace api.Mappers
                 Description = artPiece.Description,
                 Location = artPiece.Location,
                 CreatedAt = artPiece.DateCreated,
-                reviews = artPiece.reviews
+                reviews = artPiece.reviews.Select(s => s.ToReviewDTO()).ToList()
             };
         }
 
-        public static ArtPiece ToArtPiece(this CreateArtPieceDTO artPieceDTO){
+        public static ArtPiece? ToArtPiece(this CreateArtPieceDTO artPieceDTO){
             return new ArtPiece{
                 Title = artPieceDTO.Title,
                 Artist = artPieceDTO.Artist,

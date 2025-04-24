@@ -24,6 +24,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 });
 //Map the interfaces with its repo
 builder.Services.AddScoped<IArtPieceRepository, ArtPieceRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 var app = builder.Build();
 
