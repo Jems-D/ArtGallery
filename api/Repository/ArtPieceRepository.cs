@@ -59,7 +59,7 @@ namespace api.Repository
                     Location = a.Location, 
                     reviews = a.reviews,
                     })
-                .ToListAsync(); //Linq query to optimize
+                .ToListAsync(); //Linq query to optimize //to do make it queryable mamaya
             return artworks;
 
         }
