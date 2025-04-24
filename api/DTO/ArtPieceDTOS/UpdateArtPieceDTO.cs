@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using api.DTO.ReviewDTOS;
-using api.Models;
 
 namespace api.DTO.ArtPieceDTOS
 {
-    public class ArtPieceDTO
+    public class UpdateArtPieceDTO
     {
+        [Required]
+        [MaxLength(200, ErrorMessage ="Title too long")]
         public string? Title { get; set; } = string.Empty;
         public string? Artist { get; set; } = string.Empty;
         public string? Meduim { get; set; } = string.Empty;
@@ -18,8 +19,5 @@ namespace api.DTO.ArtPieceDTOS
         public string? Genre { get; set; } = string.Empty;
         public string? Description { get; set; } = string.Empty;
         public string? Location { get; set; } = string.Empty;
-        public DateTime? CreatedAt { get; set; } = DateTime.Now;
-        public List<ReviewDTO>? reviews { get; set; }
-        
     }
 }

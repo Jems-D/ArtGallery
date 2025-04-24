@@ -31,10 +31,41 @@ namespace api.Controllers
 
         [HttpPost]
         public async Task<IActionResult> CreateArtPiece([FromBody] CreateArtPieceDTO createArtPieceDTO){
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             var artPiece = createArtPieceDTO.ToArtPiece();
-            var createdArtPiece = await _repoArt.CreateArtPieceAsync(artPiece);
-            return Ok("Stocks Created");
+            await _repoArt.CreateArtPieceAsync(artPiece);
+            return CreatedAtAction(nameof(GetOneArtwork), new { id = artPiece.Id}, artPiece.ToArtPieceDTO());
         }  
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetOneArtwork([FromRoute] int id){
+            var artwork = await _repoArt.GetOneArtPieceAsync(id);
+            if(artwork == null) return NotFound("Art does not exist");
+            return Ok(artwork?.ToArtPieceDTO());
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateArtPiece([FromRoute] int id, [FromBody] UpdateArtPieceDTO artPieceDTO){
+            if(!ModelState.IsValid) return BadRequest(ModelState);
+
+            var updatedArtPiece = await _repoArt.UpdateArtPieceAsync(id, artPieceDTO);
+
+            if(updatedArtPiece == null) return NotFound("Art does not exist");
+
+            return Ok(updatedArtPiece.ToArtPieceDTO());
+
+
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteArtPiece([FromRoute] int id){
+            if(!ModelState.IsValid) return BadRequest(ModelState);
+            var deleteArtPiece = await _repoArt.DeleteArtPieceAsync(id);
+            if(deleteArtPiece  == null ) return NotFound();
+
+            return NoContent();
+        }
+
 
     }
 }
