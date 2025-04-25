@@ -9,5 +9,16 @@ namespace api.Helpers.HarvardMuseumQueries
     {
         public int Id { get; set; }
         public int pageNumber { get; set; } = 1;
+        public string? property {get; set; }
+
+        public class PropSearchQuery
+        {
+        }
+    }
+
+    public class PropSearchQuery
+    {
+        public int pageNumber { get; set; } = 1;
+        public string? property { get; set; } = string.Empty;
     }
 }

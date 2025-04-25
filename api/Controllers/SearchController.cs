@@ -19,18 +19,11 @@ namespace api.Controllers
             _repoMuseum = repoMuseum;
         }
 
-        [HttpGet("regions")]
-        public async Task<IActionResult> GetAllRegions(){
-            var regions = await _repoMuseum.FindRegions();
+        [HttpGet]
+        public async Task<IActionResult> GetProperties([FromQuery] PropSearchQuery query){
+            var regions = await _repoMuseum.FindProperties(query);
             if(regions == null) return NotFound("No regions found");
             return Ok(regions);
-        }
-
-        [HttpGet("countries/{parentId:int}")]
-        public async Task<IActionResult> GetAllCountriesFromARegion([FromRoute] int parentId){
-            var countries = await _repoMuseum.FindCountries(parentId);
-            if(countries == null) return NotFound("No countries found");
-            return Ok(countries);
         }
 
         [HttpGet("artpieces")]
@@ -39,5 +32,15 @@ namespace api.Controllers
             if(artpieces == null) return NotFound("No artworks found");
             return Ok(artpieces);
         }
+
+        [HttpGet("artpieceinfo/{objectId:int}")]
+        public async Task<IActionResult> GetArtPieceInformation([FromRoute] int objectId){
+            var artpieceInfo = await _repoMuseum.GetObjectInformation(objectId);
+            if(artpieceInfo == null){
+                return NotFound("No information found");
+            }
+            return Ok(artpieceInfo);
+        }
+
     }
 }

@@ -145,3 +145,5 @@ C:\Users\Timothy\Desktop\Important\ArtGalleryApp\api\bin\Debug\net8.0\zh-Hans\Mi
 C:\Users\Timothy\Desktop\Important\ArtGalleryApp\api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Timothy\Desktop\Important\ArtGalleryApp\api\obj\Debug\net8.0\api.sourcelink.json
 C:\Users\Timothy\Desktop\Important\ArtGalleryApp\api\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\Timothy\Desktop\Important\ArtGalleryApp\api\bin\Debug\net8.0\DotNetEnv.dll
+C:\Users\Timothy\Desktop\Important\ArtGalleryApp\api\bin\Debug\net8.0\Sprache.dll

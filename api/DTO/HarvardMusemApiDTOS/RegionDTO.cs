@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace api.DTO.HarvardMusemApiDTOS
 {
-    public class RegionDTO
+    public class PropDTO
     {
         public class Info
     {
@@ -20,6 +21,14 @@ namespace api.DTO.HarvardMusemApiDTOS
     {
         public string name { get; set; }
         public int id { get; set; }
+        [JsonProperty("displayname")]
+        private string displayname{
+            set => name = value;
+        }
+        [JsonProperty("personid")]
+        private int personid{
+            set => id = value;
+        }
     }
 
     public class Root

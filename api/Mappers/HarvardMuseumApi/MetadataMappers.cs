@@ -18,5 +18,23 @@ namespace api.Mappers.HarvardMuseumApi
                 objectid = s.objectid
             });
         }
+
+        public static ObjectMetadataDTO.Record? ToObjMtdFromRoot(this ObjectMetadataDTO.Root root){
+            return root.records.Select(s => new ObjectMetadataDTO.Record{
+                id = s.id,
+                objectid = s.objectid,
+                title = s.title,
+                description = s.description,
+                people = s.people,
+                url = s.url,
+                dated = s.dated,
+                dimensions = s.dimensions,
+                primaryimageurl = s.primaryimageurl,
+                medium = s.medium,
+                classification  = s.classification,
+                technique = s.technique
+
+            }).FirstOrDefault();
+        }
     }
 }
