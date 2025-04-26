@@ -11,14 +11,18 @@ namespace api.Helpers.HarvardMuseumQueries
         public int pageNumber { get; set; } = 1;
         public string? property {get; set; }
 
-        public class PropSearchQuery
-        {
-        }
     }
 
     public class PropSearchQuery
     {
         public int pageNumber { get; set; } = 1;
         public string? property { get; set; } = string.Empty;
+    }
+
+    public class KeywordSearchQuery
+    {
+        public int pageNumber { get; set; } = 1;
+        public string?  keyword { get; set; }
+
     }
 }

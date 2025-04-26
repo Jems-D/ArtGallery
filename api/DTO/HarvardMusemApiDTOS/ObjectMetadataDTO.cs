@@ -48,6 +48,7 @@ namespace api.DTO.HarvardMusemApiDTOS
         public int id { get; set; }
         public int objectid { get; set; }
         public string dimensions { get; set; }
+        public string provenance { get; set; }
     }
 
     public class Root

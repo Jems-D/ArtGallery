@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.DTO.HarvardMusemApiDTOS;
 using api.Helpers.HarvardMuseumQueries;
 using api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -19,14 +20,24 @@ namespace api.Controllers
             _repoMuseum = repoMuseum;
         }
 
+
         [HttpGet]
-        public async Task<IActionResult> GetProperties([FromQuery] PropSearchQuery query){
-            var regions = await _repoMuseum.FindProperties(query);
-            if(regions == null) return NotFound("No regions found");
-            return Ok(regions);
+        public async Task<IActionResult> GetArtPiecesBasedOnKeywords([FromQuery]KeywordSearchQuery searchQuery){
+            var result = await _repoMuseum.GetArtworksBasedOnKeywords(searchQuery);
+            if(result == null){
+                return NotFound("No results were found");
+            }
+            return Ok(result);
         }
 
-        [HttpGet("artpieces")]
+        [HttpGet("category")]
+        public async Task<IActionResult> GetProperties([FromQuery] PropSearchQuery query){
+            var properties = await _repoMuseum.FindProperties(query);
+            if(properties == null) return NotFound("No sub-properties found");
+            return Ok(properties);
+        }
+
+        [HttpGet("category/artpieces")]
         public async Task<IActionResult> GetArtPieces([FromQuery] ArtPieceSearchQuery searchQuery){
             var artpieces = await _repoMuseum.GetArtWorks(searchQuery);
             if(artpieces == null) return NotFound("No artworks found");
@@ -41,6 +52,29 @@ namespace api.Controllers
             }
             return Ok(artpieceInfo);
         }
+        [HttpGet("related/{objectId:int}")]
+        public async Task<IActionResult> GetRelatedArtworks([FromRoute] int objectId){
+            var relatedArts = await _repoMuseum.GetArtworkdsRelatedToObject(objectId);
+            if(relatedArts == null) return NoContent();
+            return Ok(relatedArts);
+        }
+
+        [HttpGet("exhibitions/{objectId:int}")]
+        public async Task<IActionResult> GetExhibitions([FromRoute] int objectId){
+            var exhibitions = await _repoMuseum.GetExhibitionListOfArtwork(objectId);
+            if(exhibitions == null){
+                return NoContent();
+            }
+            return Ok(exhibitions);
+        }
+
+        [HttpGet("publications/{objectId:int}")]
+        public async Task<IActionResult> GetPublications([FromRoute] int objectId){
+            var publications = await _repoMuseum.GetPublicationsListOfArtwork(objectId);
+            if(publications == null) return NoContent();
+            return Ok(publications);
+        }
+
 
     }
 }
