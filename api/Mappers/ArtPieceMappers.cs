@@ -12,7 +12,6 @@ namespace api.Mappers
         public static ArtPieceDTO ToArtPieceDTO(this ArtPiece artPiece){
             return new ArtPieceDTO{
                 Title = artPiece.Title,
-                Artist = artPiece.Artist,
                 Meduim = artPiece.Meduim,
                 Classification = artPiece.Classification,
                 Technique = artPiece.Classification,
@@ -28,7 +27,6 @@ namespace api.Mappers
         public static ArtPiece? ToArtPiece(this CreateArtPieceDTO artPieceDTO){
             return new ArtPiece{
                 Title = artPieceDTO.Title,
-                Artist = artPieceDTO.Artist,
                 Meduim = artPieceDTO.Meduim,
                 Classification = artPieceDTO.Classification,
                 Technique = artPieceDTO.Technique,

@@ -49,7 +49,6 @@ namespace api.Repository
                 .Select(a => new ArtPiece
                 {
                     Title = a.Title, 
-                    Artist = a.Artist, 
                     Meduim = a.Meduim, 
                     Classification = a.Classification, 
                     Technique = a.Technique, 
@@ -71,7 +70,6 @@ namespace api.Repository
                 .Select(a => new ArtPiece
                 {
                     Title = a.Title,
-                    Artist = a.Artist,
                     Meduim = a.Meduim,
                     Classification = a.Classification,
                     Technique = a.Technique,
@@ -93,7 +91,6 @@ namespace api.Repository
             if(artPiece == null) return null;
 
             artPiece.Title = artPieceDTO.Title;
-            artPiece.Artist = artPieceDTO.Artist;
             artPiece.Meduim = artPieceDTO.Meduim;
             artPiece.Classification = artPieceDTO.Classification;
             artPiece.Technique = artPieceDTO.Technique;

@@ -43,8 +43,8 @@ namespace api.Mappers.HarvardMuseumApi
             }).FirstOrDefault();
         }
 
-        public static IEnumerable<RelatedToDTO.Record> ToRecordFromRelatedRoot(this RelatedToDTO.Root root){
-            return root.records.Select(s => new RelatedToDTO.Record{
+        public static IEnumerable<RelatedToDTO.RecordDTO> ToRecordFromRelatedRoot(this RelatedToDTO.Root root){
+            return root.records.Select(s => new RelatedToDTO.RecordDTO{
                 title = s.title,
                 objectid = s.objectid
             });
@@ -63,6 +63,13 @@ namespace api.Mappers.HarvardMuseumApi
                         .Where(record => record.publications != null)
                         .SelectMany(record => record.publications)
                         .ToList();
+        }
+
+        public static List<PersonOtherWorksDTO.RecordDTO> ToRecordFromOtherWorksDTO(this PersonOtherWorksDTO.Root root){
+            return root.records.Select(s => new PersonOtherWorksDTO.RecordDTO{
+                title = s.title,
+                objectid = s.objectid
+            }).ToList();
         }
 
     }

@@ -16,8 +16,6 @@ namespace api.Models
         [Column("Title")]
         public int? ObjectId{ get; set; } //unique identifier for every single object on the harvard museum api
         public string? Title { get; set; } = string.Empty;
-        [Column("Artist")]
-        public string? Artist { get; set; } = string.Empty;
         [Column("Meduim")]
         public string? Meduim { get; set; } = string.Empty;
         [Column("Classification")]

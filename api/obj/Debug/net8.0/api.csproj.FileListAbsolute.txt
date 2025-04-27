@@ -147,3 +147,5 @@ C:\Users\Timothy\Desktop\Important\ArtGalleryApp\api\obj\Debug\net8.0\api.source
 C:\Users\Timothy\Desktop\Important\ArtGalleryApp\api\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\Timothy\Desktop\Important\ArtGalleryApp\api\bin\Debug\net8.0\DotNetEnv.dll
 C:\Users\Timothy\Desktop\Important\ArtGalleryApp\api\bin\Debug\net8.0\Sprache.dll
+C:\Users\Timothy\Desktop\Important\ArtGalleryApp\api\bin\Debug\net8.0\Microsoft.Bcl.Memory.dll
+C:\Users\Timothy\Desktop\Important\ArtGalleryApp\api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

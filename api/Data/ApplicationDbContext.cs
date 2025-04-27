@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.Entities;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,5 +18,6 @@ namespace api.Data
 
         public DbSet<ArtPiece> ArtPiece { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

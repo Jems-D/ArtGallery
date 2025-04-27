@@ -12,8 +12,8 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250423153552_init")]
-    partial class init
+    [Migration("20250427162013_refreshToken")]
+    partial class refreshToken
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,35 @@ namespace api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("api.Entities.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("api.Models.ArtPiece", b =>
                 {
                     b.Property<int>("Id")
@@ -34,17 +63,16 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Artist")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Artist");
-
                     b.Property<string>("Classification")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Classification");
 
-                    b.Property<DateTime>("DateCreated")
+                    b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2")
                         .HasColumnName("DateCreated");
+
+                    b.Property<string>("Dated")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)")
@@ -66,17 +94,33 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Meduim");
 
+                    b.Property<int?>("ObjectId")
+                        .HasColumnType("int")
+                        .HasColumnName("Title");
+
                     b.Property<string>("Technique")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Technique");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Title");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("imageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("placeOfOrigin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("websiteUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ArtPiece");
+                    b.ToTable("ArtPiece", t =>
+                        {
+                            t.Property("Title")
+                                .HasColumnName("Title1");
+                        });
                 });
 
             modelBuilder.Entity("api.Models.Reviews", b =>

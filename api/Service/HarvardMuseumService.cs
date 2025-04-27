@@ -42,7 +42,7 @@ namespace api.Service
             }
         }
 
-        public async Task<List<RelatedToDTO.Record>> GetArtworkdsRelatedToObject(int objectId)
+        public async Task<List<RelatedToDTO.RecordDTO>> GetArtworkdsRelatedToObject(int objectId)
         {
             try{
                 var result = await _httpClient.GetAsync($"https://api.harvardartmuseums.org/object?apikey={apiKey}&relatedto={objectId}&size=3&fields=title,objectid");
@@ -120,6 +120,23 @@ namespace api.Service
                     var task = JsonConvert.DeserializeObject<ObjectMetadataDTO.Root>(content);
                     if(task != null){
                         return task.ToObjMtdFromRoot();
+                    }
+                }
+                return null;
+            }catch(Exception ex){
+                return null;
+            }
+        }
+
+        public async Task<List<PersonOtherWorksDTO.RecordDTO>> GetOtherArtworks(GetOtherArtworksQuery query)
+        {
+            try{
+                var result = await _httpClient.GetAsync($"https://api.harvardartmuseums.org/object?apikey={apiKey}&person={query.personId}&q=-id:{query.objectId}&size=20&fields=title,objectid");
+                if(result.IsSuccessStatusCode){
+                     var content = await result.Content.ReadAsStringAsync();
+                    var task = JsonConvert.DeserializeObject<PersonOtherWorksDTO.Root>(content);
+                    if(task != null){
+                        return task.ToRecordFromOtherWorksDTO();
                     }
                 }
                 return null;

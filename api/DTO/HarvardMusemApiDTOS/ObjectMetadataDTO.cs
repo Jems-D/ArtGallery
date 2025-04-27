@@ -19,36 +19,36 @@ namespace api.DTO.HarvardMusemApiDTOS
 
     public class Person
     {
-        public string role { get; set; }
-        public string birthplace { get; set; }
-        public string gender { get; set; }
-        public string displaydate { get; set; }
-        public object prefix { get; set; }
-        public string culture { get; set; }
-        public string displayname { get; set; }
-        public string alphasort { get; set; }
-        public string name { get; set; }
+        public string? role { get; set; }
+        public string? birthplace { get; set; }
+        public string? gender { get; set; }
+        public string? displaydate { get; set; }
+        public object? prefix { get; set; }
+        public string? culture { get; set; }
+        public string? displayname { get; set; }
+        public string? alphasort { get; set; }
+        public string? name { get; set; }
         public int personid { get; set; }
-        public string deathplace { get; set; }
-        public int displayorder { get; set; }
+        public string? deathplace { get; set; }
+        public int? displayorder { get; set; }
     }
 
     public class Record
     {
-        public string technique { get; set; }
-        public object description { get; set; }
-        public object medium { get; set; }
-        public string classification { get; set; }
-        public string title { get; set; }
-        public string primaryimageurl { get; set; }
-        public List<Person> people { get; set; }
-        public string url { get; set; }
-        public int imagepermissionlevel { get; set; }
-        public string dated { get; set; }
+        public string? technique { get; set; }
+        public object? description { get; set; }
+        public object? medium { get; set; }
+        public string? classification { get; set; }
+        public string? title { get; set; }
+        public string? primaryimageurl { get; set; }
+        public List<Person>? people { get; set; }
+        public string? url { get; set; }
+        public int? imagepermissionlevel { get; set; }
+        public string? dated { get; set; }
         public int id { get; set; }
         public int objectid { get; set; }
-        public string dimensions { get; set; }
-        public string provenance { get; set; }
+        public string? dimensions { get; set; }
+        public string? provenance { get; set; }
     }
 
     public class Root

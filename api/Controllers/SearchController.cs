@@ -75,6 +75,18 @@ namespace api.Controllers
             return Ok(publications);
         }
 
+        [HttpGet("otherartworks")]
+        public async Task<IActionResult> GetOtherArtWorksByPerson([FromQuery] GetOtherArtworksQuery query){
+            try{
+                var otherArtworks = await _repoMuseum.GetOtherArtworks(query);
+                if(otherArtworks == null) return NoContent();
+                return Ok(otherArtworks);
+            }catch(Exception ex){
+                return NotFound(ex.Message);
+            }   
+            
+        }
+
 
     }
 }

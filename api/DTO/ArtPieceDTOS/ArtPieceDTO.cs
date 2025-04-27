@@ -10,7 +10,6 @@ namespace api.DTO.ArtPieceDTOS
     public class ArtPieceDTO
     {
         public string? Title { get; set; } = string.Empty;
-        public string? Artist { get; set; } = string.Empty;
         public string? Meduim { get; set; } = string.Empty;
         public string? Classification { get; set; } = string.Empty;
         public string? Technique { get; set; } = string.Empty;

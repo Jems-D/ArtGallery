@@ -25,4 +25,9 @@ namespace api.Helpers.HarvardMuseumQueries
         public string?  keyword { get; set; }
 
     }
+    public class GetOtherArtworksQuery
+    {
+        public int personId { get; set; }
+        public int objectId { get; set; }
+    }
 }
