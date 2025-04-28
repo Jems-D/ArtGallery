@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace api.DTO.HarvardMusemApiDTOS
 {
@@ -9,33 +10,48 @@ namespace api.DTO.HarvardMusemApiDTOS
     {
         public class Exhibition
         {
-            public string? begindate { get; set; }
-            public string? enddate { get; set; }
-            public string? citation { get; set; }
-            public int exhibitionid { get; set; }
-            public string? title { get; set; }
+            [JsonProperty("begindate")]
+            public string? Begindate { get; set; }
+            [JsonProperty("enddate")]
+            public string? Enddate { get; set; }
+            [JsonProperty("citation")]
+            public string? Citation { get; set; }
+            [JsonProperty("exhibitionid")]
+            public int ExhibitionId { get; set; }
+            [JsonProperty("title")]
+            public string? Title { get; set; }
         }
 
         public class Info
         {
-            public int totalrecordsperquery { get; set; }
-            public int totalrecords { get; set; }
-            public int pages { get; set; }
-            public int page { get; set; }
-            public string? responsetime { get; set; }
+            [JsonProperty("totalrecordsperquery")]
+            public  required int TotalRecordsPerQuery { get; set; }
+            [JsonProperty("totalrecords")]
+            public required int TotalRecords { get; set; }
+            [JsonProperty("pages")]
+            public required int Pages { get; set; }
+            [JsonProperty("page")]
+            public required string? Prev { get; set; }
+            [JsonProperty("responsetime")]
+            public required string? ResponseTime { get; set; }
         }
 
         public class Record
         {
-            public List<Exhibition> exhibitions { get; set; }
-            public int imagepermissionlevel { get; set; }
-            public int id { get; set; }
+            [JsonProperty("exhibitions")]
+            public List<Exhibition>? Exhibitions { get; set; }
+            [JsonProperty("imagepermissionlevel")]
+            public int ImagePermissionLevel { get; set; }
+            [JsonProperty("id")]
+            public int Id { get; set; }
         }
 
         public class Root
         {
-            public Info info { get; set; }
-            public List<Record> records { get; set; }
+            [JsonProperty("info")]
+            public Info? Info { get; set; }
+            [JsonProperty("records")]
+            public List<Record>? Records { get; set; }
         }
     }
 }

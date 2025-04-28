@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace api.DTO.HarvardMusemApiDTOS
 {
@@ -10,51 +12,84 @@ namespace api.DTO.HarvardMusemApiDTOS
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class Info
     {
-        public int totalrecordsperquery { get; set; }
-        public int totalrecords { get; set; }
-        public int pages { get; set; }
-        public int page { get; set; }
-        public string responsetime { get; set; }
+        [JsonProperty("totalrecordsperquery")]
+        public  required int TotalRecordsPerQuery { get; set; }
+        [JsonProperty("totalrecords")]
+        public required int TotalRecords { get; set; }
+        [JsonProperty("pages")]
+        public required int Pages { get; set; }
+        [JsonProperty("page")]
+        public required int Page { get; set; }
+        [JsonProperty("responsetime")]
+        public required string? ResponseTime { get; set; }
     }
 
     public class Person
     {
-        public string? role { get; set; }
-        public string? birthplace { get; set; }
-        public string? gender { get; set; }
-        public string? displaydate { get; set; }
-        public object? prefix { get; set; }
-        public string? culture { get; set; }
-        public string? displayname { get; set; }
-        public string? alphasort { get; set; }
-        public string? name { get; set; }
-        public int personid { get; set; }
-        public string? deathplace { get; set; }
-        public int? displayorder { get; set; }
+        [JsonProperty("role")]
+        public string? Role { get; set; }
+        [JsonProperty("birthplace")] 
+        public string? Birthplace { get; set; }
+        [JsonProperty("gender")]
+        public string? Gender { get; set; }
+        [JsonProperty("displaydate")]
+        public string? DisplayDate { get; set; }
+        [JsonProperty("prefix")]
+        public object? Prefix { get; set; }
+        [JsonProperty("culture")]
+        public string? Culture { get; set; }
+        [JsonProperty("dsiplayname")]
+        public string? DisplayName { get; set; }
+        [JsonProperty("alphasort")]
+        public string? AlphaSort { get; set; }
+        [JsonProperty("name")]
+        public string? Name { get; set; }
+        [JsonProperty("personid")]
+        public int PersonId { get; set; }
+        [JsonProperty("deathplace")]
+        public string? DeathPlace { get; set; }
+        [JsonProperty("displayorder")]
+        public int? DisplayOrder { get; set; }
     }
 
     public class Record
     {
-        public string? technique { get; set; }
-        public object? description { get; set; }
-        public object? medium { get; set; }
-        public string? classification { get; set; }
-        public string? title { get; set; }
-        public string? primaryimageurl { get; set; }
-        public List<Person>? people { get; set; }
-        public string? url { get; set; }
-        public int? imagepermissionlevel { get; set; }
-        public string? dated { get; set; }
-        public int id { get; set; }
-        public int objectid { get; set; }
-        public string? dimensions { get; set; }
-        public string? provenance { get; set; }
+        [JsonProperty("technique")]
+        public string? Technique { get; set; }
+        [JsonProperty("description")]
+        public object? Description { get; set; }
+        [JsonProperty("medium")]
+        public object? Medium { get; set; }
+        [JsonProperty("classification")]
+        public string? Classification { get; set; }
+        [JsonProperty("title")]
+        public string? Title { get; set; }
+        [JsonProperty("primaryimageurl")]
+        public string? PrimaryImageUrl { get; set; }
+        [JsonProperty("people")]
+        public List<Person>? People { get; set; }
+        [JsonProperty("url")]
+        public string? Url { get; set; }
+        [JsonProperty("imagepermissionlevel")]
+        public int? ImagePermissionLevel { get; set; }
+        [JsonProperty("dated")]
+        public string? Dated { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("objectid")]
+        public int ObjectId { get; set; }
+        [JsonProperty("dimensions")]
+        public string? Dimensions { get; set; }
+        [JsonProperty("provenance")]
+        public string? Provenance { get; set; }
     }
 
     public class Root
     {
-        public Info info { get; set; }
-        public List<Record> records { get; set; }
+        [JsonProperty("info")]
+        public Info? Info { get; set; }
+        [JsonProperty("records")]
+        public List<Record>? Records { get; set; }
     }
 
 

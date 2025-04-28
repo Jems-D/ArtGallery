@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace api.DTO.HarvardMusemApiDTOS
 {
@@ -9,32 +10,44 @@ namespace api.DTO.HarvardMusemApiDTOS
     {
         public class Info
         {
-            public int totalrecordsperquery { get; set; }
-            public int totalrecords { get; set; }
-            public int pages { get; set; }
-            public int page { get; set; }
-            public string next { get; set; }
-            public string responsetime { get; set; }
+            [JsonProperty("totalrecordsperquery")]
+            public  required int TotalRecordsPerQuery { get; set; }
+            [JsonProperty("totalrecords")]
+            public required int TotalRecords { get; set; }
+            [JsonProperty("pages")]
+            public required int Pages { get; set; }
+            [JsonProperty("page")]
+            public required int Page { get; set; }
+            [JsonProperty("next")]
+            public required string? Prev { get; set; }
+            [JsonProperty("responsetime")]
+            public required string? ResponseTime { get; set; }
         }
 
         public class Record
         {
-            public int imagepermissionlevel { get; set; }
-            public int id { get; set; }
-            public string? title { get; set; } = string.Empty;
-            public int objectid { get; set; }
+            [JsonProperty("imagepermissionlevel")]
+            public int ImagePermissionLevel { get; set; }
+            [JsonProperty("id")]
+            public int Id { get; set; }
+            [JsonProperty("title")]
+            public string? Title { get; set; }
+            [JsonProperty("objectid")]
+            public int ObjectId { get; set; }
         }
 
         public class Root
         {
-            public Info info { get; set; }
-            public List<Record> records { get; set; }
+            [JsonProperty("info")]
+            public Info? Info { get; set; }
+            [JsonProperty("records")]
+            public List<Record>? Records { get; set; }
         }
 
         public class RecordDTO
         {
-            public string title { get; set; }
-            public int objectid { get; set; }
+            public string? Title { get; set; }
+            public int ObjectId { get; set; }
         }
 
     }

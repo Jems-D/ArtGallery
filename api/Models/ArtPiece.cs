@@ -37,6 +37,7 @@ namespace api.Models
         public string? websiteUrl { get; set; } = string.Empty;
         public string? placeOfOrigin { get; set; } = string.Empty;
         public List<Reviews> reviews { get; set; } = new List<Reviews>();
+        public List<Favourites> favourites { get; set; } = new List<Favourites>();
 
         
     }

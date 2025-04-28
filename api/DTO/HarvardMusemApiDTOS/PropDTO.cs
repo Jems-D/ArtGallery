@@ -10,31 +10,40 @@ namespace api.DTO.HarvardMusemApiDTOS
     {
         public class Info
     {
-        public int totalrecordsperquery { get; set; }
-        public int totalrecords { get; set; }
-        public int pages { get; set; }
-        public int page { get; set; }
-        public string responsetime { get; set; }
+         [JsonProperty("totalrecordsperquery")]
+            public  required int TotalRecordsPerQuery { get; set; }
+            [JsonProperty("totalrecords")]
+            public required int TotalRecords { get; set; }
+            [JsonProperty("pages")]
+            public required int Pages { get; set; }
+            [JsonProperty("page")]
+            public required int Page { get; set; }
+            [JsonProperty("responsetime")]
+            public required string? ResponseTime { get; set; }
     }
 
     public class Record
     {
-        public string name { get; set; }
-        public int id { get; set; }
+        [JsonProperty("name")]
+        public string? Name { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
         [JsonProperty("displayname")]
-        private string displayname{
-            set => name = value;
+        private string? DisplayName{
+            set => Name = value;
         }
         [JsonProperty("personid")]
-        private int personid{
-            set => id = value;
+        private int PersonId{
+            set => Id = value;
         }
     }
 
     public class Root
     {
-        public Info info { get; set; }
-        public List<Record> records { get; set; }
+        [JsonProperty("info")]
+        public Info? Info { get; set; }
+        [JsonProperty("records")]
+        public List<Record>? Records { get; set; }
     }
 
     }

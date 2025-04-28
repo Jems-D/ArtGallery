@@ -42,7 +42,7 @@ namespace api.Repository
             return reviews;
         }
 
-        public async Task<Reviews> GetOneReviewAsync(int id)
+        public async Task<Reviews>? GetOneReviewAsync(int id)
         {
             var review = await _context.Reviews.FirstOrDefaultAsync(s => s.Id == id);
             if(review == null) return null;

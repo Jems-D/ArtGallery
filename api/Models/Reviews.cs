@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using api.Entities;
 
 namespace api.Models
 {
@@ -24,7 +25,8 @@ namespace api.Models
         [Column("ArtPieceId")]
         public int ArtPieceId { get; set; }
         public ArtPiece? ArtPiece { get; set; } // for navigation only
-
+        public Guid UserId { get; set; }
+        public User? user { get; set; }
 
     }
 }

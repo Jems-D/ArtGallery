@@ -9,10 +9,10 @@ namespace api.Mappers.HarvardMuseumApi
 {
     public static class CategoryMappers
     {
-        public static IEnumerable<PropDTO.Record> ToRecordFromPropRoot(this PropDTO.Root root){
-            return root.records.Select(r => new PropDTO.Record{
-                name = r.name,
-                id = r.id
+        public static IEnumerable<PropDTO.Record>? ToRecordFromPropRoot(this PropDTO.Root root){
+            return root.Records?.Select(r => new PropDTO.Record{
+                Name = r.Name,
+                Id = r.Id
             });
         }
     }
