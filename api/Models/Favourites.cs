@@ -11,7 +11,7 @@ namespace api.Models
     public class Favourites
     {
         [Column("UserId")]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         [Column("ArtPieceId")]
         public int ArtPieceId { get; set; }
         public User? User { get; set; }

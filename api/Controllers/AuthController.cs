@@ -43,7 +43,7 @@ namespace api.Controllers
         }
 
         [HttpGet("try")]
-        [Authorize(Roles ="Admin")]
+        [Authorize]
         public async Task<IActionResult> Try(){
             return Ok("Authorized");
         }

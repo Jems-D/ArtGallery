@@ -15,5 +15,6 @@ namespace api.Interfaces
          Task<ArtPiece> UpdateArtPieceAsync(int id, UpdateArtPieceDTO artPieceDTO);
          Task<ArtPiece> DeleteArtPieceAsync(int id);
          Task<bool> DoesArtPieceExistAsync(int id);
+         Task<int?> GetExistingCopyAsync(int objcetId);
     }
 }

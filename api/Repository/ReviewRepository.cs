@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Data;
 using api.DTO.ArtPieceDTOS;
 using api.DTO.ReviewDTOS;
+using api.Helpers;
 using api.Interfaces;
 using api.Mappers;
 using api.Models;
@@ -27,19 +28,33 @@ namespace api.Repository
             return reviews;
         }
 
-        public async Task<List<Reviews>> GetAllReviewAsync()
+        public async Task<List<Reviews>> GetAllReviewAsync(ReviewQuery query)
         {
-            var reviews = await _context.Reviews
+            var reviews = _context.Reviews
+                            .Include(a => a.User)
                             .Select(a => new Reviews{
                                 Title = a.Title,
                                 Content = a.Content,
                                 Rating = a.Rating,
                                 CreatedAt = a.CreatedAt,
-                                ArtPieceId = a.ArtPieceId
+                                ArtPieceId = a.ArtPieceId,
+                                CreatedBy = a.CreatedBy,
+                                ObjectId = a.ObjectId
 
-                            }).ToListAsync();
+                            }).AsQueryable();
 
-            return reviews;
+            if(query.ObjectId is not 0){ //pattern matching
+                reviews
+                    .Where(i => i.ObjectId == query.ObjectId);
+            }
+
+            if(!query.IsDescending){
+                reviews.OrderByDescending(s => s.CreatedAt);
+            }
+
+            var skipNumber = (query.PageNumber - 1) * query.PageSize;
+
+            return await reviews.Skip(skipNumber).Take(query.PageSize).ToListAsync();
         }
 
         public async Task<Reviews>? GetOneReviewAsync(int id)

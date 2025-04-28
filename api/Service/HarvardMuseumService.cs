@@ -121,7 +121,7 @@ namespace api.Service
         public async Task<ObjectMetadataDTO.Record?> GetObjectInformation(int objectId)
         {
             try{
-                var result = await _httpClient.GetAsync($"https://api.harvardartmuseums.org/object?apikey={apiKey}&id={objectId}&fields=objectid,title,medium,classification,technique,dimensions,dated,genre,description,location,primaryimageurl,url,placeoforigin,people");      
+                var result = await _httpClient.GetAsync($"https://api.harvardartmuseums.org/object?apikey={apiKey}&id={objectId}&fields=objectid,title,medium,classification,technique,dimensions,dated,genre,description,location,primaryimageurl,url,culture,people");      
                 if(result.IsSuccessStatusCode){
                     var content = await result.Content.ReadAsStringAsync();
                     var task = JsonConvert.DeserializeObject<ObjectMetadataDTO.Root>(content);

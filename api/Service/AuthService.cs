@@ -10,7 +10,6 @@ using api.Data;
 using api.DTO;
 using api.Entities;
 using api.Interfaces;
-using api.Migrations;
 using Azure.Core;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
@@ -57,6 +56,7 @@ namespace api.Service
             
             user.Username = dto.Username;
             user.PasswordHash = hashedPassword;
+            user.Role = "User";
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();

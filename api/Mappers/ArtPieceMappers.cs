@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.DTO.ArtPieceDTOS;
+using api.DTO.HarvardMusemApiDTOS;
 using api.Models;
 
 namespace api.Mappers
@@ -16,9 +17,8 @@ namespace api.Mappers
                 Classification = artPiece.Classification,
                 Technique = artPiece.Classification,
                 Dimensions = artPiece.Dimensions,
-                Genre = artPiece.Genre,
+                Culture = artPiece.Culture,
                 Description = artPiece.Description,
-                Location = artPiece.Location,
                 CreatedAt = artPiece.DateCreated,
                 reviews = artPiece.reviews.Select(s => s.ToReviewDTO()).ToList()
             };
@@ -31,9 +31,25 @@ namespace api.Mappers
                 Classification = artPieceDTO.Classification,
                 Technique = artPieceDTO.Technique,
                 Dimensions = artPieceDTO.Dimensions,
-                Genre = artPieceDTO.Genre,
+                Culture = artPieceDTO.Culture,
                 Description = artPieceDTO.Description,
-                Location = artPieceDTO.Location,
+            };
+        }
+
+        public static ArtPiece? ToArtPieceFromMetadata(this ObjectMetadataDTO.Record record){
+            string? imageUrl = record.ImagePermissionLevel < 2 ? record.PrimaryImageUrl : "";
+            return new ArtPiece{
+    
+                Title = record.Title,
+                ObjectId = record.ObjectId,
+                Meduim = record.Medium,
+                Classification = record.Classification,
+                Technique = record.Technique,
+                Dimensions = record.Dimensions,
+                Culture = record.Culture,
+                Description = record.Description,
+                ImageUrl = imageUrl,
+                WebsiteUrl = record.Url
             };
         }
     }

@@ -57,9 +57,9 @@ namespace api.DTO.HarvardMusemApiDTOS
         [JsonProperty("technique")]
         public string? Technique { get; set; }
         [JsonProperty("description")]
-        public object? Description { get; set; }
+        public string? Description { get; set; }
         [JsonProperty("medium")]
-        public object? Medium { get; set; }
+        public string? Medium { get; set; }
         [JsonProperty("classification")]
         public string? Classification { get; set; }
         [JsonProperty("title")]
@@ -82,6 +82,8 @@ namespace api.DTO.HarvardMusemApiDTOS
         public string? Dimensions { get; set; }
         [JsonProperty("provenance")]
         public string? Provenance { get; set; }
+        [JsonProperty("culture")]
+        public string? Culture { get; set; }
     }
 
     public class Root

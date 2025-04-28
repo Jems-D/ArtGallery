@@ -38,7 +38,8 @@ namespace api.Mappers.HarvardMuseumApi
                 Medium = s.Medium,
                 Classification  = s.Classification,
                 Technique = s.Technique,
-                Provenance = s.Provenance
+                Provenance = s.Provenance,
+                Culture = s.Culture
 
             }).FirstOrDefault();
         }

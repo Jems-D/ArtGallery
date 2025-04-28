@@ -25,6 +25,7 @@ namespace api.Mappers
                 Content = reviews.Content,
                 Rating = reviews.Rating,
                 CreatedAt = reviews.CreatedAt,
+                CreatedBy = reviews.CreatedBy,
                 ArtPieceId = reviews.ArtPieceId
             };
         }

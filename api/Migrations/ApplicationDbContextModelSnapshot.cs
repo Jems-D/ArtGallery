@@ -64,6 +64,10 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Classification");
 
+                    b.Property<string>("Culture")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Culture");
+
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2")
                         .HasColumnName("DateCreated");
@@ -79,13 +83,8 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Dimensions");
 
-                    b.Property<string>("Genre")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Genre");
-
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Location");
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Meduim")
                         .HasColumnType("nvarchar(max)")
@@ -93,31 +92,39 @@ namespace api.Migrations
 
                     b.Property<int?>("ObjectId")
                         .HasColumnType("int")
-                        .HasColumnName("Title");
+                        .HasColumnName("ObjectId");
 
                     b.Property<string>("Technique")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Technique");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Title");
 
-                    b.Property<string>("imageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("placeOfOrigin")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("websiteUrl")
+                    b.Property<string>("WebsiteUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ArtPiece", t =>
-                        {
-                            t.Property("Title")
-                                .HasColumnName("Title1");
-                        });
+                    b.ToTable("ArtPiece");
+                });
+
+            modelBuilder.Entity("api.Models.Favourites", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("UserId");
+
+                    b.Property<int>("ArtPieceId")
+                        .HasColumnType("int")
+                        .HasColumnName("ArtPieceId");
+
+                    b.HasKey("UserId", "ArtPieceId");
+
+                    b.HasIndex("ArtPieceId");
+
+                    b.ToTable("FavouritesList");
                 });
 
             modelBuilder.Entity("api.Models.Reviews", b =>
@@ -141,6 +148,12 @@ namespace api.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("CreatedAt");
 
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ObjectId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Rating")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("Rating");
@@ -149,11 +162,35 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Title");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ArtPieceId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("api.Models.Favourites", b =>
+                {
+                    b.HasOne("api.Models.ArtPiece", "ArtPiece")
+                        .WithMany("favourites")
+                        .HasForeignKey("ArtPieceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("api.Entities.User", "User")
+                        .WithMany("Favourites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ArtPiece");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("api.Models.Reviews", b =>
@@ -164,11 +201,26 @@ namespace api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("api.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("ArtPiece");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("api.Entities.User", b =>
+                {
+                    b.Navigation("Favourites");
                 });
 
             modelBuilder.Entity("api.Models.ArtPiece", b =>
                 {
+                    b.Navigation("favourites");
+
                     b.Navigation("reviews");
                 });
 #pragma warning restore 612, 618

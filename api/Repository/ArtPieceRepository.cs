@@ -53,14 +53,24 @@ namespace api.Repository
                     Classification = a.Classification, 
                     Technique = a.Technique, 
                     Dimensions = a.Dimensions, 
-                    Genre = a.Genre, 
-                    Description = a.Description, 
-                    Location = a.Location, 
+                    Culture = a.Culture, 
+                    Description = a.Description,  
                     reviews = a.reviews,
                     })
-                .ToListAsync(); //Linq query to optimize //to do make it queryable mamaya
+                .ToListAsync();
             return artworks;
 
+        }
+
+        public async Task<int?> GetExistingCopyAsync(int objcetId)
+        {
+            var existingCopy = await _context.ArtPiece
+                                .Where(s => s.ObjectId == objcetId)
+                                .Select(s=> s.Id)
+                                .FirstOrDefaultAsync();
+            if(existingCopy == null) return 0;
+            return existingCopy;
+                                
         }
 
         public async Task<ArtPiece?> GetOneArtPieceAsync(int id)
@@ -74,9 +84,8 @@ namespace api.Repository
                     Classification = a.Classification,
                     Technique = a.Technique,
                     Dimensions = a.Dimensions,
-                    Genre = a.Genre,
+                    Culture = a.Culture,
                     Description = a.Description,
-                    Location = a.Location,
                     DateCreated = a.DateCreated})
                 .FirstOrDefaultAsync();
 
@@ -95,9 +104,8 @@ namespace api.Repository
             artPiece.Classification = artPieceDTO.Classification;
             artPiece.Technique = artPieceDTO.Technique;
             artPiece.Dimensions = artPieceDTO.Dimensions;
-            artPiece.Genre = artPieceDTO.Genre;
+            artPiece.Culture = artPieceDTO.Culture;
             artPiece.Description = artPieceDTO.Description;
-            artPiece.Location = artPieceDTO.Location;
 
             _context.Entry(artPiece).CurrentValues.SetValues(artPieceDTO);
 

@@ -17,8 +17,7 @@ namespace api.DTO.ArtPieceDTOS
         public string? Classification { get; set; } = string.Empty;
         public string? Technique { get; set; } = string.Empty;
         public string? Dimensions { get; set; } = string.Empty;
-        public string? Genre { get; set; } = string.Empty;
+        public string? Culture { get; set; } = string.Empty;
         public string? Description { get; set; } = string.Empty;
-        public string? Location { get; set; } = string.Empty;
     }
 }

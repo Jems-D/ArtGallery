@@ -13,8 +13,9 @@ namespace api.Models
         [Column("Id")]
         [Key]
         public int Id { get; set; }
-        [Column("Title")]
+        [Column("ObjectId")]
         public int? ObjectId{ get; set; } //unique identifier for every single object on the harvard museum api
+        [Column("Title")]
         public string? Title { get; set; } = string.Empty;
         [Column("Meduim")]
         public string? Meduim { get; set; } = string.Empty;
@@ -27,15 +28,12 @@ namespace api.Models
         [Column("DateCreated")] 
         public DateTime? DateCreated { get; set; } = DateTime.Now;
         public string? Dated { get; set; } = string.Empty;
-        [Column("Genre")]
-        public string? Genre { get; set; } = string.Empty;
+        [Column("Culture")]
+        public string? Culture { get; set; } = string.Empty;
         [Column("Description")]
         public string? Description { get; set; } = string.Empty;
-        [Column("Location")]
-        public string? Location { get; set; } = string.Empty;
-        public string? imageUrl { get; set; } = string.Empty;
-        public string? websiteUrl { get; set; } = string.Empty;
-        public string? placeOfOrigin { get; set; } = string.Empty;
+        public string? ImageUrl { get; set; } = string.Empty;
+        public string? WebsiteUrl { get; set; } = string.Empty;
         public List<Reviews> reviews { get; set; } = new List<Reviews>();
         public List<Favourites> favourites { get; set; } = new List<Favourites>();
 
