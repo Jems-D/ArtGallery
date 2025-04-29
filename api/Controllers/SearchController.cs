@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.DTO.HarvardMusemApiDTOS;
 using api.Helpers.HarvardMuseumQueries;
 using api.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 
@@ -12,6 +13,7 @@ namespace api.Controllers
 {
     [Route("api/search")]
     [ApiController]
+    [Authorize(Roles = "User")]
     public class SearchController : ControllerBase
     {
         private readonly IHarvardMuseuemApiRepository _repoMuseum;

@@ -26,7 +26,7 @@ namespace api.Models
         [Column("Dimensions")]
         public string? Dimensions { get; set; } = string.Empty;
         [Column("DateCreated")] 
-        public DateTime? DateCreated { get; set; } = DateTime.Now;
+        public DateTime DateCreated { get; set; } = DateTime.Now;
         public string? Dated { get; set; } = string.Empty;
         [Column("Culture")]
         public string? Culture { get; set; } = string.Empty;

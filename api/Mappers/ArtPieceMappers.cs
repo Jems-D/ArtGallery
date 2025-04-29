@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.DTO.ArtPieceDTOS;
 using api.DTO.HarvardMusemApiDTOS;
 using api.Models;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace api.Mappers
 {
@@ -50,6 +51,14 @@ namespace api.Mappers
                 Description = record.Description,
                 ImageUrl = imageUrl,
                 WebsiteUrl = record.Url
+            };
+        }
+        public static ArtPieceFavDTO ToArtPieceFavFromArtPiece(this ArtPiece art)
+        {
+            return new ArtPieceFavDTO{
+                Title = art.Title,
+                imageUrl = art.ImageUrl,
+                AddedAt = art.DateCreated
             };
         }
     }

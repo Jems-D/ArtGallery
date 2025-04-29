@@ -72,6 +72,7 @@ builder.Services.AddScoped<IArtPieceRepository, ArtPieceRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IHarvardMuseuemApiRepository, HarvardMuseumService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IFavouritesRepository, FavouritesRepository>();
 builder.Services.AddHttpClient<IHarvardMuseuemApiRepository, HarvardMuseumService>();
 
 var app = builder.Build();
@@ -86,6 +87,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials()
+    //.WithOrigins("https://localhost:5005")
+    .SetIsOriginAllowed(origin => true)
+);
+
+
 //
 app.UseAuthentication();
 app.UseAuthorization();

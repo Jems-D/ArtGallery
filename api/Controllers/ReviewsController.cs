@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using api.DTO.ReviewDTOS;
+using api.Extensions;
 using api.Helpers;
 using api.Interfaces;
 using api.Mappers;
@@ -15,7 +16,7 @@ namespace api.Controllers
 {
     [Route("api/review")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "User")]
     public class ReviewsController : ControllerBase
     {
         private readonly IReviewRepository _repoReview;
@@ -49,7 +50,7 @@ namespace api.Controllers
                 }
             }
 
-            var username = User.FindFirstValue(ClaimTypes.Name); //according to stock overflow answer around 7 years ago, this gets the username from the jwttoken, will only work when [Authorize is given]
+            var username = User.GetUserName(); 
             if(username == null)return BadRequest("Can't create a review, because username cannot be found");
             var userClaimId = User.FindFirstValue(ClaimTypes.NameIdentifier);   // get the UserID of the user
             var review = reviewDTO.ToReview(existingCopy == null ? newArtPiece.Id : (int)existingCopy);              

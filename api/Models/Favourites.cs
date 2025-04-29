@@ -15,7 +15,7 @@ namespace api.Models
         [Column("ArtPieceId")]
         public int ArtPieceId { get; set; }
         public User? User { get; set; }
-        public ArtPiece? ArtPiece { get; set; }
+        public ArtPiece ArtPiece { get; set; }
 
     }
 }

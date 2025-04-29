@@ -71,7 +71,7 @@ namespace api.DTO.HarvardMusemApiDTOS
         [JsonProperty("url")]
         public string? Url { get; set; }
         [JsonProperty("imagepermissionlevel")]
-        public int? ImagePermissionLevel { get; set; }
+        public int ImagePermissionLevel { get; set; }
         [JsonProperty("dated")]
         public string? Dated { get; set; }
         [JsonProperty("id")]

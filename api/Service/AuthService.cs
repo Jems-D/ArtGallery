@@ -119,5 +119,12 @@ namespace api.Service
             };
 
         }
+
+        public async Task<User?> FindByNameAsync(string username)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(s => s.Username == username);
+            if(user == null) return null;
+            return user;
+        }
     }
 }

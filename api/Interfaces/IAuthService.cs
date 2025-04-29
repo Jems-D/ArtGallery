@@ -12,6 +12,7 @@ namespace api.Interfaces
         Task<User> RegisterAsync(UserDTO dto);
         Task<TokenResponseDTO?> LoginAsync(UserDTO dto);
         Task<TokenResponseDTO?> RefreshTokensAsync(RefreshRequestTokenDTO dto);
+        Task<User?> FindByNameAsync(string username);
     
     }
 }

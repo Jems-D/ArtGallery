@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.DTO.ArtPieceDTOS;
 using api.Interfaces;
 using api.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -12,6 +13,7 @@ namespace api.Controllers
 {
     [Route("api/artpiece")]
     [ApiController]
+    [Authorize(Roles ="User")]
     public class ArtPieceController : ControllerBase
     {
         private readonly IArtPieceRepository _repoArt;
