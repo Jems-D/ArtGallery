@@ -11,5 +11,5 @@
 }
 
 body {
-  @apply bg-isabelline;
+  @apply bg-isabelline  dark:bg-gray-900;
 }
