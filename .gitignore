@@ -1,3 +1,6 @@
 /api/.env
 /api/obj/
 /api/bin/
+.vscode
+/api/.vscode
+/frontend/.env

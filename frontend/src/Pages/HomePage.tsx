@@ -25,11 +25,11 @@ const HomePage = ({}: Props) => {
   };
 
   return (
-    <aside className="flex flex-row flex-wrap mt-10 ml-6 mr-6 lg:flex-nowrap lg:mr-0">
-      <div className=" w-full h-[85vh] lg:w-1/2">
+    <aside className="flex flex-row flex-wrap mt-10 mx-6 lg:flex-nowrap lg:mx-6 lg:gap-x-6">
+      <div className=" w-full h-[85vh] lg:flex-1">
         <MainBg />
       </div>
-      <div className="w-full lg:w-1/2 mr-6 ml-6">
+      <div className="flex flex-row w-full flex-nowrap max-h-[85vh] mt-5 lg:flex-1 lg:flex-wrap lg:overflow-y-scroll lg:mt-0 lg:mb-2">
         {isLoading && <NewsList data={news} />}
       </div>
     </aside>

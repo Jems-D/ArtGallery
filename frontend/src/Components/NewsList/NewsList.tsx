@@ -8,17 +8,17 @@ interface Props {
 
 const NewsList = ({ data }: Props): JSX.Element => {
   return (
-    <ul className="list-none">
+    <ul className="list-none columns:1 gap-4 lg:columns-2">
       {data.news.length ? (
         data.news.map((news) => {
           return (
-            <li>
+            <li className="w-full break-inside-avoid mb-4">
               <News data={news} />
             </li>
           );
         })
       ) : (
-        <li>No news available</li>
+        <li className="font-sans dark:white">No news available</li>
       )}
     </ul>
   );

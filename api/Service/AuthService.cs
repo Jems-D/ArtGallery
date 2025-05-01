@@ -40,6 +40,9 @@ namespace api.Service
             return new TokenResponseDTO{
                 AccessToken = CreateToken(user),
                 RefreshToken = await GenerateAndSAveRefreshTokenAsync(user),
+                User = user.Username,
+                Role = user.Role,
+                Id = user.Id,
             };
 
         } 
@@ -101,9 +104,9 @@ namespace api.Service
         }
 
        
-       private async Task<User?> ValidateRefreshTokenAsync(Guid id, string refreshToken){
+       private async Task<User?> ValidateRefreshTokenAsync(Guid id){
             var user = await _context.Users.FindAsync(id);
-            if(user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow){
+            if(user == null || user.RefreshTokenExpiryTime <= DateTime.UtcNow){
                 return null;
             }
             return user;
@@ -111,11 +114,14 @@ namespace api.Service
 
         public async Task<TokenResponseDTO?> RefreshTokensAsync(RefreshRequestTokenDTO dto)
         {
-            var user = await ValidateRefreshTokenAsync(dto.Id, dto.RefreshToken);
+            var user = await ValidateRefreshTokenAsync(dto.Id);
             if(user == null) return null;
             return new TokenResponseDTO{
                 AccessToken = CreateToken(user),
                 RefreshToken = await GenerateAndSAveRefreshTokenAsync(user),
+                User = user.Username,
+                Role = user.Role,
+                Id = user.Id
             };
 
         }

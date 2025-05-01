@@ -31,7 +31,7 @@ namespace api.Controllers
         {
             var account = await _auth.RegisterAsync(dto);
             if(account == null) return BadRequest("Username already exist");
-            return Ok(account);
+            return Ok();
         } 
 
         [HttpPost("login")]
@@ -39,7 +39,19 @@ namespace api.Controllers
         {
             var result = await _auth.LoginAsync(dto);
             if(result == null) return BadRequest("Invalid username or password");
-            return Ok(result);
+            var cookieOptions = new CookieOptions{
+                HttpOnly = true,
+                Secure = true, 
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.Now.AddDays(1)
+            };
+                Response.Cookies.Append("authToken", result.AccessToken, cookieOptions);
+            
+            return Ok(new UserResponseDTO{
+                User = result.User,
+                Role =result.Role,
+                Id = user.Id
+            });
         }
 
         [HttpGet("try")]
@@ -52,10 +64,20 @@ namespace api.Controllers
         public async Task<IActionResult> RefreshToken(RefreshRequestTokenDTO dto)
         {
             var result = await _auth.RefreshTokensAsync(dto);
-            if(result == null)  return BadRequest("Invalid refresh token");
-            return Ok( new TokenResponseDTO{
-                AccessToken = result.AccessToken,
-                RefreshToken = result.RefreshToken,
+            if(result == null)  return BadRequest("Refresh token still in valid");
+
+            var cookieOptions = new CookieOptions{
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.Now.AddDays(7)
+            };
+            Response.Cookies.Append("authToken", result.AccessToken, cookieOptions);
+
+            return Ok( new UserResponseDTO{
+                User = result.User,
+                Role = result.Role,
+                Id = result.Id
             });
         }
     }
