@@ -6,7 +6,8 @@ import FavouritesPage from "../Pages/FavouritesPage";
 import LoginPage from "../Pages/LoginPage";
 import RegisterPage from "../Pages/RegisterPage";
 import ProtectedRoutes from "./ProtectedRoutes";
-
+import UnauthorizedPage from "../Pages/UnauthorizedPage";
+import ForbiddenPage from "../Pages/ForbiddenPage";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +25,8 @@ export const router = createBrowserRouter([
       { path: "favs", element: <FavouritesPage /> },
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
+      { path: "unauthorized", element: <UnauthorizedPage /> },
+      { path: "forbidden", element: <ForbiddenPage /> },
     ],
   },
 ]);

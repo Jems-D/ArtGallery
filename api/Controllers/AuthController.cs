@@ -50,7 +50,7 @@ namespace api.Controllers
             return Ok(new UserResponseDTO{
                 User = result.User,
                 Role =result.Role,
-                Id = user.Id
+                Id = result.Id
             });
         }
 
@@ -64,7 +64,7 @@ namespace api.Controllers
         public async Task<IActionResult> RefreshToken(RefreshRequestTokenDTO dto)
         {
             var result = await _auth.RefreshTokensAsync(dto);
-            if(result == null)  return BadRequest("Refresh token still in valid");
+            if(result == null)  return BadRequest("Token still valid");
 
             var cookieOptions = new CookieOptions{
                 HttpOnly = true,

@@ -49,6 +49,7 @@ export const UserProvider = ({ children }: Props) => {
       .then((res) => {
         if (res) {
           if (res.status === 200) console.log("Registration Success");
+          navigate("/login");
         }
       })
       .catch((e) => console.log("Server Error", e));
@@ -117,4 +118,4 @@ export const UserProvider = ({ children }: Props) => {
   );
 };
 
-export const userAuth = () => React.useContext(UserContext);
+export const useAuth = () => React.useContext(UserContext);

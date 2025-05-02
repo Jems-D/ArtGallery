@@ -12,7 +12,7 @@ const NewsList = ({ data }: Props): JSX.Element => {
       {data.news.length ? (
         data.news.map((news) => {
           return (
-            <li className="w-full break-inside-avoid mb-4">
+            <li className="w-full break-inside-avoid mb-4" key={news.id}>
               <News data={news} />
             </li>
           );

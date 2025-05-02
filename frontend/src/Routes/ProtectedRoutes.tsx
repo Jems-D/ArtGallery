@@ -1,6 +1,7 @@
 import React from "react";
-import { userAuth } from "../Context/useAuth";
-import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../Context/useAuth";
+import { Navigate, replace, useLocation } from "react-router-dom";
+import { all } from "axios";
 
 interface Props {
   children: React.ReactElement;
@@ -9,14 +10,15 @@ interface Props {
 
 const ProtectedRoutes = ({ children, allowedRoles }: Props) => {
   const location = useLocation();
-  const { isAuthenticated, user } = userAuth();
+  const { isAuthenticated, user } = useAuth();
 
-  return isAuthenticated() &&
-    allowedRoles.includes(user ? user.role : "none") ? (
-    <>{children}</>
-  ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
-  );
+  if (!isAuthenticated()) {
+    return <Navigate to="/unauthorized" state={{ from: location }} replace />;
+  }
+  if (!user || !allowedRoles.includes(user.role)) {
+    return <Navigate to="forbidden" state={{ from: location }} replace />;
+  }
+  return <>{children}</>;
 };
 
 export default ProtectedRoutes;

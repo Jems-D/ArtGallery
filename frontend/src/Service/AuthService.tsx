@@ -17,10 +17,16 @@ export const registerUserApi = async (username: string, password: string) => {
 
 export const loginUserApi = async (username: string, password: string) => {
   try {
-    const result = await axios.post<AccountData>(`${apiUrl}login`, {
-      username: username,
-      password: password,
-    });
+    const result = await axios.post<AccountData>(
+      `${apiUrl}login`,
+      {
+        username: username,
+        password: password,
+      },
+      {
+        withCredentials: true,
+      }
+    );
     return result;
   } catch (err: any) {
     handleError(err);
