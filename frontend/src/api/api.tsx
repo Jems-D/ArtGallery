@@ -1,13 +1,11 @@
 import axios from "axios";
 import { Root } from "react-dom/client";
-
+const newsUrl = import.meta.env.VITE_API_URL_NEWS_ENDPOINT;
 type Props = {};
 
 export const getLatestNews = async () => {
   try {
-    const data = await axios.get<Root | null>(
-      "https://api.currentsapi.services/v1/latest-news?category=art&limit=20&apiKey=IKoU0ELheQMztc9xxeH9DUDfT7hVoTkytkacjv1vrsFOUtjC"
-    );
+    const data = await axios.get<Root | null>(`${newsUrl}`);
     return data.data;
   } catch (err) {
     if (axios.isAxiosError(err)) {

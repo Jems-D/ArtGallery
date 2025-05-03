@@ -74,6 +74,8 @@ builder.Services.AddScoped<IHarvardMuseuemApiRepository, HarvardMuseumService>()
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IFavouritesRepository, FavouritesRepository>();
 builder.Services.AddHttpClient<IHarvardMuseuemApiRepository, HarvardMuseumService>();
+builder.Services.AddScoped<INewsService, NewsService>();
+builder.Services.AddHttpClient<INewsService, NewsService>();
 
 var app = builder.Build();
 
