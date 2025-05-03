@@ -16,7 +16,7 @@ const ProtectedRoutes = ({ children, allowedRoles }: Props) => {
     return <Navigate to="/unauthorized" state={{ from: location }} replace />;
   }
   if (!user || !allowedRoles.includes(user.role)) {
-    return <Navigate to="forbidden" state={{ from: location }} replace />;
+    return <Navigate to="/forbidden" state={{ from: location }} replace />;
   }
   return <>{children}</>;
 };

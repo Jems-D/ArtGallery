@@ -42,7 +42,7 @@ namespace api.Controllers
             var cookieOptions = new CookieOptions{
                 HttpOnly = true,
                 Secure = true, 
-                SameSite = SameSiteMode.Strict,
+                SameSite = SameSiteMode.None,
                 Expires = DateTime.Now.AddDays(1)
             };
                 Response.Cookies.Append("authToken", result.AccessToken, cookieOptions);
@@ -69,8 +69,8 @@ namespace api.Controllers
             var cookieOptions = new CookieOptions{
                 HttpOnly = true,
                 Secure = true,
-                SameSite = SameSiteMode.Strict,
-                Expires = DateTime.Now.AddDays(7)
+                SameSite = SameSiteMode.None,   //using none will allow cross site origin for differnt front-end url
+                Expires = DateTime.Now.AddDays(1)
             };
             Response.Cookies.Append("authToken", result.AccessToken, cookieOptions);
 

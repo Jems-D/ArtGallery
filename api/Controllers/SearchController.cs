@@ -13,7 +13,7 @@ namespace api.Controllers
 {
     [Route("api/search")]
     [ApiController]
-    [Authorize(Roles = "User")]
+    [Authorize(Roles ="User")]
     public class SearchController : ControllerBase
     {
         private readonly IHarvardMuseuemApiRepository _repoMuseum;

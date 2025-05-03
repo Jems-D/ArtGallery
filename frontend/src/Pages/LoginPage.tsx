@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { useAuth } from "../Context/useAuth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 type Props = {};
 
 interface LoginForm {
@@ -17,7 +17,7 @@ const validation = Yup.object().shape({
 });
 
 const LoginPage = (props: Props) => {
-  const { loginUser } = useAuth();
+  const { loginUser, isAuthenticated } = useAuth();
   const {
     register,
     handleSubmit,
@@ -27,6 +27,9 @@ const LoginPage = (props: Props) => {
   const onSubmit = (form: LoginForm) => {
     loginUser(form.username, form.password);
   };
+  if (isAuthenticated()) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <article className="w-full h-[100vh] grid place-items-center bg-applewhite">

@@ -54,6 +54,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => 
     {
+        options.RequireHttpsMetadata = true;  //since secure is true on the cookie
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -63,6 +64,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Token"]!)),
             ValidateIssuerSigningKey = true
+        };
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                if(context.Request.Cookies.TryGetValue("authToken", out var token))
+                {
+                    context.Token = token;
+                }
+                return Task.CompletedTask;
+            }
         };
     });
 
@@ -94,8 +106,8 @@ app.UseCors(x => x
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials()
-    //.WithOrigins("https://localhost:5005")
-    .SetIsOriginAllowed(origin => true)
+    .WithOrigins("http://localhost:5173")
+    //.SetIsOriginAllowed(origin => true)  the cookied on httpOnly won't work if the origin is every origin is allowed, will always get a 401 unauthorized
 );
 
 

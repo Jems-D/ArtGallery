@@ -3,11 +3,11 @@ import { useAuth } from "../Context/useAuth";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 type Props = {};
 
 const RegisterPage = (props: Props) => {
-  const { registerUser } = useAuth();
+  const { registerUser, isAuthenticated } = useAuth();
 
   interface RegisterForm {
     username: string;
@@ -28,6 +28,10 @@ const RegisterPage = (props: Props) => {
   const onSubmit = (form: RegisterForm) => {
     registerUser(form.username, form.password);
   };
+
+  if (isAuthenticated()) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <article className="w-full h-[100vh] grid place-items-center bg-applewhite">
