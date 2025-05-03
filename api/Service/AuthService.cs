@@ -89,7 +89,7 @@ namespace api.Service
                 issuer: _configuration.GetValue<string>("JWT:Issuer"),
                 audience: _configuration.GetValue<string>("JWT:Audience"),
                 claims: claim,
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials: creds
             );
             return new  JwtSecurityTokenHandler().WriteToken(tokenDescriptor);

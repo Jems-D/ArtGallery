@@ -6,12 +6,19 @@ import {
 } from "@heroicons/react/24/outline";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../Context/useAuth";
 
 interface Props {}
 
 const Navbar = (props: Props) => {
+  const { isAuthenticated } = useAuth();
+
   return (
-    <header className="flex flex-row w-full mt-2 shadow-white-50">
+    <header
+      className={`flex flex-row w-full mt-2 shadow-white-5 ${
+        isAuthenticated() ? "bg-isabelline" : "bg-applewhite"
+      }`}
+    >
       <div className="flex flex-row items-center w-1/3 justify-start ml-6">
         <Bars3Icon className="w-6 h-6 lg:w-8 lg:h-8" />
         <p className="ml-2 text-sm font-serif dark:text-white">MENU</p>

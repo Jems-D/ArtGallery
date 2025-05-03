@@ -3,6 +3,7 @@ import { useAuth } from "../Context/useAuth";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router-dom";
 type Props = {};
 
 const RegisterPage = (props: Props) => {
@@ -29,43 +30,78 @@ const RegisterPage = (props: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col items-center">
-        <div className="">
-          <label
-            className="text-sm text-start dark:text-white"
-            htmlFor="userName"
-          >
-            Username
-          </label>
-          <input
-            type="string"
-            className=""
-            id="userName"
-            {...register("username")}
-          />
-          {errors.username?.message && <span>{errors.username.message}</span>}
+    <article className="w-full h-[100vh] grid place-items-center bg-applewhite">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-[100vw] h-3/4 lg:h-1/2 lg:w-1/4"
+      >
+        <div className="flex flex-col">
+          <div className="p-8">
+            <div className="flex justify-center mb-10">
+              <h2 className="text-3xl text-gray-900   font-serif tracking-tight dark:text-gray-100 ">
+                Register an account
+              </h2>
+            </div>
+            <div className="flex mb-5">
+              <div className="flex flex-col ">
+                <label
+                  className="tex  t-black text-sm/6 font-medium mb-2 dark:text-gray-100"
+                  htmlFor="username"
+                >
+                  Username
+                </label>
+                <input
+                  className="bg-white w-100 p-2  rounded-md outline-1 outline-offset-1 placeholder:text-gray-500"
+                  id="username"
+                  placeholder="artgalleryuser1"
+                  {...register("username")}
+                />
+                {errors.username?.message && (
+                  <span className="text-right mt-1 text-sm text-red-500">
+                    {errors.username.message}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="flex mb-10">
+              <div className="flex flex-col ">
+                <label
+                  className="text-black text-sm/6 font-medium mb-2 dark:text-gray-100"
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="bg-white w-100 p-2 rounded-md outline-1 outline-offset-1 "
+                  id="password"
+                  type="password"
+                  {...register("password")}
+                />
+                {errors.password?.message && (
+                  <span className="text-right mt-1 text-sm text-red-500">
+                    {errors.password.message}
+                  </span>
+                )}
+              </div>
+            </div>
+            <button
+              className="bg-paledogwood rounded-md w-100 p-2 font-semibold"
+              type="submit"
+            >
+              Sign Up
+            </button>
+            <div className="mt-3 flex w-100 justify-items">
+              <span className="text-base text-right w-full text-gray">
+                Already have an account?{" "}
+                <Link to="/login" className="hover:text-blue-500">
+                  Click here
+                </Link>
+              </span>
+            </div>
+          </div>
         </div>
-        <div className="">
-          <label
-            className="text-sm text-start dark:text-white"
-            htmlFor="passWord"
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            className=""
-            id="passWord"
-            {...register("password")}
-          />
-          {errors.password?.message && <span>{errors.password.message}</span>}
-        </div>
-      </div>
-      <button className="" type="submit">
-        Sign Up
-      </button>
-    </form>
+      </form>
+    </article>
   );
 };
 
