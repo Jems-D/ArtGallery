@@ -8,10 +8,10 @@ interface Props {
 
 const CardList = ({ cardInfo }: Props) => {
   return (
-    <ul className="list-none">
+    <ul className="list-none gap-5 columns-1 lg:columns-5">
       {cardInfo.map((info, index) => {
         return (
-          <li key={index}>
+          <li key={index} className="mb-5 w-fit break-inside-avoid">
             <Card cardInfo={info} />
           </li>
         );

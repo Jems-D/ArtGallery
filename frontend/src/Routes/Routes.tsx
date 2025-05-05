@@ -8,6 +8,7 @@ import RegisterPage from "../Pages/RegisterPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 import UnauthorizedPage from "../Pages/UnauthorizedPage";
 import ForbiddenPage from "../Pages/ForbiddenPage";
+import ObjectProfilePage from "../Pages/ObjectProfilePage";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
           </ProtectedRoutes>
         ),
       },
+      { path: "obj/:objectid", element: <ObjectProfilePage /> },
       { path: "favs", element: <FavouritesPage /> },
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },

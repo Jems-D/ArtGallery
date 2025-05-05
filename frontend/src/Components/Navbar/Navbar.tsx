@@ -31,15 +31,15 @@ const Navbar = (props: Props) => {
         </Link>
       </div>
       <div className="flex flex-row items-center w-1/3 justify-end mr-6 ">
-        <div className="group inline-block mr-5">
+        <div className="group inline-block mr-5 cursor-pointer">
           <UserIcon className="w-6 h-6 mx-auto lg:w-8 lg:h-8 dark:text-white" />
           <span className="block h-1 bg-black dark:bg-white max-w-0 group-hover:max-w-full transition-all duration-500 ease-in-out"></span>
         </div>
-        <Link to="search" className="group inline-block mr-5">
+        <Link to="search" className="group inline-block mr-5 cursor-pointer">
           <MagnifyingGlassIcon className="w-6 h-6 mx-auto  lg:w-8 sm:h-8 dark:text-white" />
           <span className="block h-1 bg-black dark:bg-white max-w-0 mx-auto group-hover:max-w-6 transition-all duration-500 ease-in-out"></span>
         </Link>
-        <Link to="favs" className="group inline-block">
+        <Link to="favs" className="group inline-block cursor-pointer">
           <BookmarkIcon className="w-6 h-6 mx-auto  lg:w-8 lg:h-8 dark:text-white" />
           <span className="block h-1 bg-black dark:bg-white max-w-0 mx-auto group-hover:max-w-6 transition-all duration-500 ease-in-out"></span>
         </Link>

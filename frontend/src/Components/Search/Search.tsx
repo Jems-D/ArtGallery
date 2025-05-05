@@ -17,7 +17,7 @@ const Search = ({ handleSubmit, search, handleInputChange }: Props) => {
           onChange={handleInputChange}
         />
         <button
-          className="rounded-e-md p-2 w-[10%] bg-paledogwood"
+          className="rounded-e-md p-2 w-[10%] bg-paledogwood cursor-pointer"
           type="submit"
         >
           Search

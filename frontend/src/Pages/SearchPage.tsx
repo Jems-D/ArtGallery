@@ -30,7 +30,9 @@ const SearchPage = (props: Props) => {
         search={query}
         handleInputChange={onChange}
       />
-      <div className="mt-10">{results && <CardList cardInfo={results} />}</div>
+      <div className="mt-10 px-6 mb-10">
+        {results && <CardList cardInfo={results} />}
+      </div>
     </div>
   );
 };
