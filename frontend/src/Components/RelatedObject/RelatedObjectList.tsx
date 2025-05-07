@@ -10,10 +10,10 @@ const RelatedObjectList = ({ objects }: Props) => {
   return (
     <>
       {objects.length
-        ? objects.map((obj) => {
+        ? objects.map((obj, index) => {
             return (
               <ul>
-                <li key={obj.objectId}>
+                <li key={index}>
                   <RelatedObjects object={obj} />
                 </li>
               </ul>

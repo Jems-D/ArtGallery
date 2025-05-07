@@ -1,25 +1,35 @@
 import React from "react";
-import { ObjectMetadata } from "../../apitypes/musuem";
+import { ObjectMetadata, OtherWorks, Related } from "../../apitypes/musuem";
 import privacy from "../Card/privacy.svg";
 import "../ObjectInformation/ObjectInformation.css";
+import RelatedObjectList from "../RelatedObject/RelatedObjectList";
+import SameArtistList from "../MoreFromSameArtist/SameArtistList";
 interface Props {
   objectInfo: ObjectMetadata;
+  relatedObjects: Related[];
+  otherWorks: OtherWorks[];
 }
 
-const ObjectInformation = ({ objectInfo }: Props) => {
+const ObjectInformation = ({
+  objectInfo,
+  relatedObjects,
+  otherWorks,
+}: Props) => {
   return (
     <div className="rounded-md shadow bg-applewhite p-3 gap-5 lg:flex ">
-      <img
-        src={
-          typeof objectInfo.primaryImageUrl !== "string" ||
-          objectInfo.primaryImageUrl === ""
-            ? privacy
-            : objectInfo.primaryImageUrl
-        }
-        className="object-cover rouded-md"
-        id="objectimage"
-      />
-      <div className="flex flex-col">
+      <div className="w-fit">
+        <img
+          src={
+            typeof objectInfo.primaryImageUrl !== "string" ||
+            objectInfo.primaryImageUrl === ""
+              ? privacy
+              : objectInfo.primaryImageUrl
+          }
+          className="object-scale-down rouded-md"
+          id="objectimage"
+        />
+      </div>
+      <div className=" flex flex-col flex-1">
         {objectInfo.title && (
           <p className="font-serif font-semibold text-2xl text-right">
             {objectInfo.title}
@@ -51,6 +61,19 @@ const ObjectInformation = ({ objectInfo }: Props) => {
             )
           );
         })}
+        {relatedObjects.length ? (
+          <div className="flex flex-col">
+            <span className="text-sm">Related works: </span>
+            <RelatedObjectList objects={relatedObjects} />
+          </div>
+        ) : null}
+
+        {otherWorks.length ? (
+          <div className="flex flex-col">
+            <span className="text-sm"> Other artworks from the artist:</span>
+            <SameArtistList otherWorks={otherWorks} />
+          </div>
+        ) : null}
       </div>
     </div>
   );

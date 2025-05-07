@@ -1,6 +1,11 @@
 import axios from "axios";
 import { handleError } from "../Helpers/ErrorHandler";
-import { ObjectMetadata, Related, SearchResults } from "../apitypes/musuem";
+import {
+  ObjectMetadata,
+  OtherWorks,
+  Related,
+  SearchResults,
+} from "../apitypes/musuem";
 
 const museumUrl = import.meta.env.VITE_API_URL_MUSUEM_ENDPOINT;
 
@@ -41,6 +46,23 @@ export const getRelatedObjects = async (objectId: number) => {
       }
     );
     return related.data;
+  } catch (err: any) {
+    handleError(err);
+  }
+};
+
+export const getOtherWorksOfArtist = async (
+  personId: number,
+  objectId: number
+) => {
+  try {
+    const otherWorks = await axios.get<OtherWorks[]>(
+      `${museumUrl}/otherartworks?personId=${personId}&objectId=${objectId}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return otherWorks.data;
   } catch (err: any) {
     handleError(err);
   }

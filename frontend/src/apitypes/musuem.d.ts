@@ -48,3 +48,10 @@ export interface Related {
   title: string | null;
   objectId: number;
 }
+
+//artist other works
+
+export interface OtherWorks {
+  title: string | null;
+  objectId: number;
+}
