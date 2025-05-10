@@ -55,3 +55,21 @@ export interface OtherWorks {
   title: string | null;
   objectId: number;
 }
+
+//exhibitions
+export interface Exhibitions {
+  begindate: string | null;
+  enddate: string | null;
+  exhibitionId: number;
+  citation: string | null;
+  title: string | null;
+}
+
+export interface Publications {
+  publicationPlace: string | null;
+  publicationYear: number;
+  citation: string | null;
+  pageNumbers: string | null;
+  format: string | null;
+  title: string | null;
+}

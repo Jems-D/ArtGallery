@@ -1,8 +1,10 @@
 import axios from "axios";
 import { handleError } from "../Helpers/ErrorHandler";
 import {
+  Exhibitions,
   ObjectMetadata,
   OtherWorks,
+  Publications,
   Related,
   SearchResults,
 } from "../apitypes/musuem";
@@ -63,6 +65,34 @@ export const getOtherWorksOfArtist = async (
       }
     );
     return otherWorks.data;
+  } catch (err: any) {
+    handleError(err);
+  }
+};
+
+export const getExhibitions = async (objectId: number) => {
+  try {
+    const exhibitions = await axios.get<Exhibitions[]>(
+      `${museumUrl}/exhibitions/${objectId}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return exhibitions.data;
+  } catch (err: any) {
+    handleError(err);
+  }
+};
+
+export const getPubllications = async (objectId: number) => {
+  try {
+    const publications = await axios.get<Publications[]>(
+      `${museumUrl}/publications/${objectId}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return publications.data;
   } catch (err: any) {
     handleError(err);
   }

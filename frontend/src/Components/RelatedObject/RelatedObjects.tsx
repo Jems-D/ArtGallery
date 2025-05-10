@@ -9,7 +9,7 @@ interface Props {
 const RelatedObjects = ({ object }: Props) => {
   return (
     <Link to={`/obj/${object.objectId}`} reloadDocument type="">
-      <p className="underline">{object.title}</p>
+      <p className="underline text-right">{object.title}</p>
     </Link>
   );
 };

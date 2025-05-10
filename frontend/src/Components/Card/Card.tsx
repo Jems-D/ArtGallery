@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { SearchResults } from "../../apitypes/musuem";
 import privacy from "./privacy.svg";
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 interface Props {
   cardInfo: SearchResults;
 }
@@ -25,7 +26,6 @@ const Card = ({ cardInfo }: Props) => {
           {cardInfo.title}
         </h3>
       </Link>
-
       <p className="text-wrap place-self-start"> {cardInfo.description}</p>
       <p className="place-self-start">{cardInfo.classification}</p>
       <p className="place-self-start">{cardInfo.technique}</p>

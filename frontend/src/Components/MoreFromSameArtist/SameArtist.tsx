@@ -9,7 +9,7 @@ interface Props {
 const SameArtist = ({ otherWorks }: Props) => {
   return (
     <Link to={`/obj/${otherWorks.objectId}`}>
-      <p className="person">{otherWorks.title}</p>
+      <p className="underline text-right">{otherWorks.title}</p>
     </Link>
   );
 };

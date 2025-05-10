@@ -6,12 +6,13 @@ import {
   People,
   Related,
 } from "../apitypes/musuem";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import {
   getObjectInformation,
   getOtherWorksOfArtist,
   getRelatedObjects,
 } from "../Service/MuseumService";
+import InsideNavBar from "../Components/InsideNavbar/InsideNavbar";
 interface Props {}
 
 const ObjectProfilePage = (props: Props) => {
@@ -53,12 +54,21 @@ const ObjectProfilePage = (props: Props) => {
   return (
     <div className="mt-10 mx-6">
       {typeof objInfo !== "undefined" && (
-        <div>
+        <div className="flex flex-col">
           <ObjectInformation
             objectInfo={objInfo}
             relatedObjects={relatedObjs}
             otherWorks={otherWrks}
           />
+          <div className="flex mt-5">
+            <div className="flex-1 flex-col">
+              <section className="">
+                <InsideNavBar />
+                <Outlet context={numObjectId} />
+              </section>
+            </div>
+            <div className="flex-1"></div>
+          </div>
         </div>
       )}
     </div>

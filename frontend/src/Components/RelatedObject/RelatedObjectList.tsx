@@ -12,7 +12,7 @@ const RelatedObjectList = ({ objects }: Props) => {
       {objects.length
         ? objects.map((obj, index) => {
             return (
-              <ul>
+              <ul className="">
                 <li key={index}>
                   <RelatedObjects object={obj} />
                 </li>

@@ -9,6 +9,8 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import UnauthorizedPage from "../Pages/UnauthorizedPage";
 import ForbiddenPage from "../Pages/ForbiddenPage";
 import ObjectProfilePage from "../Pages/ObjectProfilePage";
+import Publications from "../Components/Publications/Publications";
+import Exhibitions from "../Components/Exhibitions/Exhibitions";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -23,7 +25,14 @@ export const router = createBrowserRouter([
           </ProtectedRoutes>
         ),
       },
-      { path: "obj/:objectid", element: <ObjectProfilePage /> },
+      {
+        path: "obj/:objectid",
+        element: <ObjectProfilePage />,
+        children: [
+          { path: "publications", element: <Publications /> },
+          { path: "exhibitions", element: <Exhibitions /> },
+        ],
+      },
       { path: "favs", element: <FavouritesPage /> },
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },

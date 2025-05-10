@@ -51,6 +51,9 @@ const ObjectInformation = ({
         {objectInfo.provenance && (
           <p className="text-right">{objectInfo.provenance}</p>
         )}
+        {objectInfo.description && (
+          <p className="text-right text-wrap">{objectInfo.description}</p>
+        )}
 
         {objectInfo.people.map((peope) => {
           return (
@@ -62,15 +65,18 @@ const ObjectInformation = ({
           );
         })}
         {relatedObjects.length ? (
-          <div className="flex flex-col">
-            <span className="text-sm">Related works: </span>
+          <div className="flex flex-col justify-end mt-5">
+            <span className="text-sm text-right">Related works: </span>
             <RelatedObjectList objects={relatedObjects} />
           </div>
         ) : null}
 
         {otherWorks.length ? (
-          <div className="flex flex-col">
-            <span className="text-sm"> Other artworks from the artist:</span>
+          <div className="flex flex-col justify-end mt-5">
+            <span className="text-sm text-right">
+              {" "}
+              Other artworks from the artist:
+            </span>
             <SameArtistList otherWorks={otherWorks} />
           </div>
         ) : null}
