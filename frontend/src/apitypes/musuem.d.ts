@@ -73,3 +73,13 @@ export interface Publications {
   format: string | null;
   title: string | null;
 }
+//Reviews
+
+export interface Reviews {
+  title: string;
+  content: string;
+  rating: number;
+  createdAt: string;
+  createdBy: string;
+  artPieceId: number;
+}

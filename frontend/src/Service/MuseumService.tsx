@@ -6,10 +6,12 @@ import {
   OtherWorks,
   Publications,
   Related,
+  Reviews,
   SearchResults,
 } from "../apitypes/musuem";
 
 const museumUrl = import.meta.env.VITE_API_URL_MUSUEM_ENDPOINT;
+const reviewUrl = import.meta.env.VITE_API_URL_MUSUEM_REVIEW_ENDPOINT;
 
 export const searchResult = async (keyword: string, pageNumber: number) => {
   try {
@@ -93,6 +95,44 @@ export const getPubllications = async (objectId: number) => {
       }
     );
     return publications.data;
+  } catch (err: any) {
+    handleError(err);
+  }
+};
+
+export const createComment = async (
+  title: string,
+  content: string,
+  rating: number,
+  objectId: number
+) => {
+  try {
+    const createdComment = await axios.post<Reviews>(
+      `${reviewUrl}/${objectId}`,
+      {
+        title: title,
+        content: content,
+        rating: rating,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    return createdComment;
+  } catch (err: any) {
+    handleError(err);
+  }
+};
+
+export const getComments = async (objectId: number) => {
+  try {
+    const reviews = await axios.get<Reviews[]>(
+      `${reviewUrl}?ObjectId=${objectId}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return reviews;
   } catch (err: any) {
     handleError(err);
   }

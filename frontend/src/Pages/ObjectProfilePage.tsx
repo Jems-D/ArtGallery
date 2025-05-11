@@ -13,6 +13,8 @@ import {
   getRelatedObjects,
 } from "../Service/MuseumService";
 import InsideNavBar from "../Components/InsideNavbar/InsideNavbar";
+import CommentForm from "../Components/Comment/CommentForm/CommentForm";
+import Review from "../Components/Comment/Review";
 interface Props {}
 
 const ObjectProfilePage = (props: Props) => {
@@ -22,6 +24,12 @@ const ObjectProfilePage = (props: Props) => {
   const [personId, setPersonId] = useState<number>(0);
   const { objectid } = useParams<string>();
   const numObjectId = Number(objectid);
+
+  interface CommentInputForm {
+    title: string;
+    content: string;
+    rating: number;
+  }
 
   useEffect(() => {
     fetchObjectInfo();
@@ -67,7 +75,9 @@ const ObjectProfilePage = (props: Props) => {
                 <Outlet context={numObjectId} />
               </section>
             </div>
-            <div className="flex-1"></div>
+            <div className="flex-1">
+              <Review objectId={numObjectId} />
+            </div>
           </div>
         </div>
       )}
