@@ -16,7 +16,10 @@ interface CommentInputForm {
 const validations = Yup.object().shape({
   title: Yup.string().required(),
   content: Yup.string().required(),
-  rating: Yup.number().required(),
+  rating: Yup.number()
+    .required()
+    .min(1, "Atleast one star")
+    .max(5, "Five is the highest"),
 });
 
 const CommentForm = ({ onSubmit }: Props) => {
@@ -29,9 +32,10 @@ const CommentForm = ({ onSubmit }: Props) => {
   } = useForm<CommentInputForm>({ resolver: yupResolver(validations) });
   const submit = async (e: CommentInputForm) => {
     onSubmit(e).then((res) => {
-      reset();
+      reset({ rating: 0 });
     });
   };
+
   return (
     <form className="flex flex-col" onSubmit={handleSubmit(submit)}>
       <div className="">
@@ -67,7 +71,9 @@ const CommentForm = ({ onSubmit }: Props) => {
           )}
         />
       </div>
-      <button type="submit">Submit Review</button>
+      <button type="submit" className="cursor-pointer">
+        Submit Review
+      </button>
     </form>
   );
 };

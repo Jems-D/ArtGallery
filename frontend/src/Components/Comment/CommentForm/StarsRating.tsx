@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface Props {
   totalStars?: number;
@@ -11,8 +11,11 @@ function StarsRating({
   initialRating = 0,
   handleClick,
 }: Props) {
-  const [rating, setRating] = useState<number>(initialRating);
   const [hovered, setHovered] = useState<number>(0);
+
+  useEffect(() => {
+    setHovered(0);
+  }, [initialRating]);
 
   const handleMouseEnter = (value: number) => setHovered(value);
   const handleMouseLeave = () => setHovered(0);
