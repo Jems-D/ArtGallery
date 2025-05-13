@@ -4,6 +4,7 @@ import NewsList from "../Components/NewsList/NewsList";
 import { Root } from "../news";
 import { getLatestNews } from "../api/api";
 import News from "../Components/News/News";
+import "../Pages/HomePage.css";
 
 interface Props {}
 
@@ -29,7 +30,10 @@ const HomePage = ({}: Props) => {
       <div className=" w-full h-[85vh] lg:flex-1">
         <MainBg />
       </div>
-      <div className="flex flex-row w-full flex-nowrap max-h-[85vh] mt-5 lg:flex-1 lg:flex-wrap lg:overflow-y-scroll lg:mt-0 lg:mb-2">
+      <div
+        className="flex flex-row w-full flex-nowrap max-h-[85vh] mt-5 lg:flex-1 lg:flex-wrap lg:overflow-y-scroll lg:mt-0 lg:mb-2"
+        id="news"
+      >
         {isLoading && <NewsList data={news} />}
       </div>
     </aside>

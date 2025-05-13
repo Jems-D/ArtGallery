@@ -132,7 +132,7 @@ export const getComments = async (objectId: number) => {
         withCredentials: true,
       }
     );
-    return reviews;
+    return reviews.data;
   } catch (err: any) {
     handleError(err);
   }

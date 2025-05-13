@@ -1,0 +1,8 @@
+#news::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+#news {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
