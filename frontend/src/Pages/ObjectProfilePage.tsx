@@ -68,14 +68,14 @@ const ObjectProfilePage = (props: Props) => {
             relatedObjects={relatedObjs}
             otherWorks={otherWrks}
           />
-          <div className="flex mt-5">
-            <div className="flex-1 flex-col">
+          <div className="flex mt-5 flex-col lg:flex-row">
+            <div className="flex-1 flex-col mr-10">
               <section className="">
                 <InsideNavBar />
                 <Outlet context={numObjectId} />
               </section>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 mt-10 lg:mt-0">
               <Review objectId={numObjectId} />
             </div>
           </div>

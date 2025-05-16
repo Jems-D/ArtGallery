@@ -4,35 +4,34 @@ interface Props {
   totalStars?: number;
   initialRating: number;
   handleClick: (value: number) => void;
+  isDisabled?: boolean;
 }
 
 function StarsRating({
   totalStars = 5,
   initialRating = 0,
   handleClick,
+  isDisabled = false,
 }: Props) {
-  const [hovered, setHovered] = useState<number>(0);
-
-  useEffect(() => {
-    setHovered(0);
-  }, [initialRating]);
-
-  const handleMouseEnter = (value: number) => setHovered(value);
-  const handleMouseLeave = () => setHovered(0);
+  useEffect(() => {}, [initialRating]);
 
   return (
-    <div className="inline-block cursor-pointer">
+    <div
+      className={`inline-block ${isDisabled === false ? "cursor-pointer" : ""}`}
+    >
       {Array.from({ length: totalStars }, (_, i) => {
         const starValue = i + 1;
-        const isFilled = starValue <= (hovered || initialRating);
+        const isFilled = starValue <= initialRating;
         return (
           <span
             key={starValue}
-            onClick={() => handleClick(starValue)}
-            onMouseEnter={() => handleMouseEnter(starValue)}
-            onMouseLeave={() => handleMouseLeave}
+            onClick={() => {
+              if (!isDisabled) {
+                handleClick(starValue);
+              }
+            }}
             style={{
-              fontSize: "2rem",
+              fontSize: isDisabled === false ? "2rem" : "1rem",
               color: isFilled ? "#FFd700" : "#CCC",
               transition: "color 0.2s",
             }}
