@@ -44,7 +44,7 @@ namespace api.Controllers
 
             var existingCopy = await _repoArt.GetExistingCopyAsync(objectId);
             ArtPiece newArtPiece = null;
-            if(existingCopy == null || existingCopy == 0){
+            if(existingCopy == null){
                 var newCopy = await _repoMuseum.GetObjectInformation(objectId);
                 if(newCopy == null){
                     return BadRequest("ArtPiece does not exist");
@@ -54,7 +54,7 @@ namespace api.Controllers
                 }
             }
 
-            var id = existingCopy == null ? newArtPiece.Id : (int)existingCopy; 
+            var id = existingCopy == null ? newArtPiece.Id : (int)existingCopy.Id; 
             
             if(await _repoFav.DoesArtPieceAlreadyExistAsync(user, id)){
                 return BadRequest("Art Piece Already Added");

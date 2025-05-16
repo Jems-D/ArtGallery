@@ -19,15 +19,19 @@ function Review({ objectId }: Props) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [reviewPerPage, setReviewPerPage] = useState<number>(5);
   const [totalReviews, setTotalReviews] = useState<number>(0);
+  const [refreshKey, setRefreshKey] = useState<number>(0);
   useEffect(() => {
     fetchComments();
-  }, [currentPage]);
+  }, [currentPage, refreshKey]);
 
   const onReviewSubmit = (e: CommentInputForm) => {
     return createComment(e.title, e.content, e.rating, objectId)
       .then((res) => {
-        if (res?.status === 200) {
-          fetchComments();
+        if (res?.status === 201) {
+          if (totalReviews <= 5) {
+            setRefreshKey((prev) => prev + 1);
+            console.log(`keyyyyy: ${refreshKey}`);
+          }
         }
       })
       .catch(() => {});
@@ -36,10 +40,10 @@ function Review({ objectId }: Props) {
   const fetchComments = async () => {
     const reviews = await getComments(objectId, currentPage);
     if (reviews) {
-      if (Array.isArray(reviews.reviews)) {
-        setComments(reviews.reviews);
-        setReviewPerPage(reviews.pageSize);
-        setTotalReviews(reviews.totalCount);
+      if (Array.isArray(reviews.data.reviews)) {
+        setComments(reviews.data.reviews);
+        setReviewPerPage(reviews.data.pageSize);
+        setTotalReviews(reviews.data.totalCount);
       }
     }
   };

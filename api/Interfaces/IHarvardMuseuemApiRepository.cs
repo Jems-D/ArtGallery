@@ -15,7 +15,7 @@ namespace api.Interfaces
         Task<List<PropDTO.Record>?> FindProperties(PropSearchQuery searchQuery);
         Task<List<CardInfoDTO.Record>?> GetArtWorks(ArtPieceSearchQuery searchQuery);
         Task<ObjectMetadataDTO.Record?> GetObjectInformation(int objectId);
-        Task<List<CardInfoDTO.Record>?> ?GetArtworksBasedOnKeywords(KeywordSearchQuery searchQuery);
+        Task<CardInfoDTO.SearchResults<CardInfoDTO.Record>?> GetArtworksBasedOnKeywords(KeywordSearchQuery searchQuery);
         Task<List<RelatedToDTO.RecordDTO>?> GetArtworkdsRelatedToObject(int objectId);
         Task<List<ExhibitionDTO.Exhibition>?> GetExhibitionListOfArtwork(int objectId);
         Task<List<PublicationDTO.Publication>?> GetPublicationsListOfArtwork(int objectId);

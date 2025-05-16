@@ -7,7 +7,9 @@ import {
   Publications,
   Related,
   Reviews,
+  ReviewsPagination,
   SearchResults,
+  SearchResultsPagination,
 } from "../apitypes/musuem";
 
 const museumUrl = import.meta.env.VITE_API_URL_MUSUEM_ENDPOINT;
@@ -15,7 +17,7 @@ const reviewUrl = import.meta.env.VITE_API_URL_MUSUEM_REVIEW_ENDPOINT;
 
 export const searchResult = async (keyword: string, pageNumber: number) => {
   try {
-    var searchResults = await axios.get<SearchResults[]>(
+    var searchResults = await axios.get<SearchResultsPagination>(
       `${museumUrl}?pageNumber=${pageNumber}&keyword=${keyword}`,
       {
         withCredentials: true,
@@ -126,13 +128,13 @@ export const createComment = async (
 
 export const getComments = async (objectId: number, pageNumber: number) => {
   try {
-    const reviews = await axios.get<Reviews[]>(
+    const reviews = await axios.get<ReviewsPagination>(
       `${reviewUrl}?ObjectId=${objectId}&PageNumber=${pageNumber}`,
       {
         withCredentials: true,
       }
     );
-    return reviews.data;
+    return reviews;
   } catch (err: any) {
     handleError(err);
   }

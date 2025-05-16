@@ -62,13 +62,16 @@ namespace api.Repository
 
         }
 
-        public async Task<int?> GetExistingCopyAsync(int objcetId)
+        public async Task<Ids?> GetExistingCopyAsync(int objcetId)
         {
             var existingCopy = await _context.ArtPiece
                                 .Where(s => s.ObjectId == objcetId)
-                                .Select(s=> s.Id)
+                                .Select(s=> new Ids{
+                                    Id = s.Id,
+                                    ObjectId = (int)s.ObjectId
+                                })
                                 .FirstOrDefaultAsync();
-            if(existingCopy == null) return 0;
+            if(existingCopy == null) return null;
             return existingCopy;
                                 
         }

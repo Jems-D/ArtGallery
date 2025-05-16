@@ -8,6 +8,14 @@ export interface SearchResults {
   primaryImageUrl: string | null;
   objectId: number;
 }
+
+export interface SearchResultsPagination {
+  totaCount: number;
+  pageSize: number;
+  pageNumber: number;
+  artPieces: SearchResults[];
+}
+
 //For object info
 export interface ObjectMetadata {
   technique: string | null;

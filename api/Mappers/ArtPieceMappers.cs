@@ -50,7 +50,8 @@ namespace api.Mappers
                 Culture = record.Culture,
                 Description = record.Description,
                 ImageUrl = imageUrl,
-                WebsiteUrl = record.Url
+                WebsiteUrl = record.Url,
+
             };
         }
         public static ArtPieceFavDTO ToArtPieceFavFromArtPiece(this ArtPiece art)

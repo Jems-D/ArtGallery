@@ -9,6 +9,7 @@ using api.Mappers.HarvardMuseumApi;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using DotNetEnv;
+using Humanizer;
 namespace api.Service
 {
     public class HarvardMuseumService : IHarvardMuseuemApiRepository
@@ -80,7 +81,7 @@ namespace api.Service
             }
         }
 
-        public async Task<List<CardInfoDTO.Record>?> GetArtworksBasedOnKeywords(KeywordSearchQuery searchQuery)
+        public async Task<CardInfoDTO.SearchResults<CardInfoDTO.Record>> GetArtworksBasedOnKeywords(KeywordSearchQuery searchQuery)
         {
             try{
                 var result = await _httpClient.GetAsync($"https://api.harvardartmuseums.org/object?apikey={apiKey}&q={searchQuery.keyword}&size=20&page={searchQuery.pageNumber}&fields=objectid,title,primaryimageurl,technique,classification");
@@ -88,7 +89,13 @@ namespace api.Service
                     var content = await result.Content.ReadAsStringAsync();
                     var task = JsonConvert.DeserializeObject<CardInfoDTO.Root>(content);
                     if(task != null){
-                        return task.ToCardInfoFromRoot()?.ToList();
+                        var artPieces = new CardInfoDTO.SearchResults<CardInfoDTO.Record>{
+                            pageNumber = searchQuery.pageNumber,
+                            totaCount = task.Info.TotalRecords,
+                            pageSize = 20,
+                            artPieces = task.ToCardInfoFromRoot()?.ToList()
+                        };
+                        return artPieces;
                     }
                 }
                 return null;

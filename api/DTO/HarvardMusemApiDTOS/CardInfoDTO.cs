@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -53,6 +54,15 @@ namespace api.DTO.HarvardMusemApiDTOS
             public Info? Info { get; set; }
             [JsonProperty("records")]
             public List<Record>? Records { get; set; }
+        }
+
+
+        public class SearchResults<T>
+        {
+            public int totaCount { get; set; }
+            public int pageSize { get; set; }
+            public int pageNumber { get; set; }
+            public List<T>? artPieces { get; set; }    
         }
 
     }

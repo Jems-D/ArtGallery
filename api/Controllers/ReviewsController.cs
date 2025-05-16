@@ -39,7 +39,7 @@ namespace api.Controllers
             //if(!isExist) return BadRequest("No art piece found");
             var  existingCopy = await _repoArt.GetExistingCopyAsync(objectId);
             ArtPiece newArtPiece = null;
-            if(existingCopy == 0 || existingCopy == null){
+            if(existingCopy == null){
                 var newCopy = await _repoMuseum.GetObjectInformation(objectId);
                 if(newCopy == null){
                     return BadRequest("This object does not exist");
@@ -53,7 +53,14 @@ namespace api.Controllers
             var username = User.GetUserName(); 
             if(username == null)return BadRequest("Can't create a review, because username cannot be found");
             var userClaimId = User.FindFirstValue(ClaimTypes.NameIdentifier);   // get the UserID of the user
-            var review = reviewDTO.ToReview(existingCopy == null ? newArtPiece.Id : (int)existingCopy);              
+            var review = reviewDTO.ToReview(existingCopy == null ? (int)newArtPiece.Id : (int)existingCopy.Id);              
+
+            if(existingCopy != null){
+                review.ObjectId = existingCopy.ObjectId;
+            }else{
+                review.ObjectId = (int)newArtPiece.ObjectId;
+            }
+
 
             if(Guid.TryParse(userClaimId, out Guid userId)){
                  review.UserId = userId; //add userId to it

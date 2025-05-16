@@ -23,14 +23,14 @@ namespace api.Repository
 
         public async Task<Reviews> CreateReviewAsync(Reviews reviews)
         {
-            var addReview = await _context.AddAsync(reviews);
+            var addReview = await _context.Reviews.AddAsync(reviews);
             await _context.SaveChangesAsync();
             return reviews;
         }
 
         public async Task<ReviewResultsDTO<ReviewDTO>> GetAllReviewAsync(ReviewQuery query)
         {
-            var totalCount = await _context.Reviews.CountAsync();
+            var totalCount = await _context.Reviews.Where(s=> s.ObjectId == query.ObjectId).CountAsync();
 
             var reviews = _context.Reviews
                             .Include(a => a.User)
@@ -46,12 +46,12 @@ namespace api.Repository
                             }).AsQueryable();
 
             if(query.ObjectId is not 0){ //pattern matching
-                reviews
+                reviews = reviews
                     .Where(i => i.ObjectId == query.ObjectId);
             }
 
             if(!query.IsDescending){
-                reviews.OrderByDescending(s => s.CreatedAt);
+                reviews = reviews.OrderByDescending(s => s.CreatedAt);
             }
 
             var skipNumber = (query.PageNumber - 1) * query.PageSize;
@@ -99,5 +99,6 @@ namespace api.Repository
             await _context.SaveChangesAsync();
             return existingReview;
         }
+
     }
 }
