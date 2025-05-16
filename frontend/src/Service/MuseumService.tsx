@@ -124,10 +124,10 @@ export const createComment = async (
   }
 };
 
-export const getComments = async (objectId: number) => {
+export const getComments = async (objectId: number, pageNumber: number) => {
   try {
     const reviews = await axios.get<Reviews[]>(
-      `${reviewUrl}?ObjectId=${objectId}`,
+      `${reviewUrl}?ObjectId=${objectId}&PageNumber=${pageNumber}`,
       {
         withCredentials: true,
       }

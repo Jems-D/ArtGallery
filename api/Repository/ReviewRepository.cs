@@ -28,8 +28,10 @@ namespace api.Repository
             return reviews;
         }
 
-        public async Task<List<Reviews>> GetAllReviewAsync(ReviewQuery query)
+        public async Task<ReviewResultsDTO<ReviewDTO>> GetAllReviewAsync(ReviewQuery query)
         {
+            var totalCount = await _context.Reviews.CountAsync();
+
             var reviews = _context.Reviews
                             .Include(a => a.User)
                             .Select(a => new Reviews{
@@ -54,7 +56,18 @@ namespace api.Repository
 
             var skipNumber = (query.PageNumber - 1) * query.PageSize;
 
-            return await reviews.Skip(skipNumber).Take(query.PageSize).ToListAsync();
+            var reviewsList =  await reviews.Skip(skipNumber).Take(query.PageSize).ToListAsync();
+
+            var result = new ReviewResultsDTO<ReviewDTO>{
+                pageNumber = query.PageNumber,
+                totalCount = totalCount,
+                reviews = reviewsList.Select(s=> s.ToReviewDTO()).ToList(),
+                pageSize = query.PageSize
+            };
+            return result;
+
+
+
         }
 
         public async Task<Reviews>? GetOneReviewAsync(int id)

@@ -72,7 +72,7 @@ namespace api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllReviews([FromQuery] ReviewQuery query){
             var reviews = await _repoReview.GetAllReviewAsync(query);
-            return Ok(reviews.Select(s => s.ToReviewDTO()));
+            return Ok(reviews);
         }
 
         [HttpGet("{id:int}")]

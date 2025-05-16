@@ -83,3 +83,10 @@ export interface Reviews {
   createdBy: string;
   artPieceId: number;
 }
+
+export interface ReviewsPagination {
+  totalCount: number;
+  pageSize: number;
+  pageNumber: number;
+  reviews: Reviews[];
+}

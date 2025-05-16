@@ -10,7 +10,7 @@ const ReviewList = ({ review }: Props) => {
   return (
     <>
       <ul className="h-fit">
-        <p className="font-serif text-2xl mb-1">Reviews</p>
+        <p className="font-serif text-2xl mb-1 mt-2">Reviews</p>
         {review.map((rev, index) => {
           return (
             <li key={`rev-${index}`} className="border-b-1 border-gray-300">
