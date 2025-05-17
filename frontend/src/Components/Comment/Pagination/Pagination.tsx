@@ -24,7 +24,9 @@ const Pagination = ({
       {paginationNumbers.map((pageNumber) => {
         return (
           <button
-            className={`${currentPage === pageNumber ? "border-gray-900" : ""}`}
+            className={`mr-1 outline-1 p-2 rounded-sm ${
+              currentPage === pageNumber ? "bg-paledogwood" : ""
+            } hover:outline-2`}
             onClick={() => handlePagination(pageNumber)}
             key={`num-${pageNumber}`}
           >

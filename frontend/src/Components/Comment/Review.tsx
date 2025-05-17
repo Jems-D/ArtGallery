@@ -52,15 +52,17 @@ function Review({ objectId }: Props) {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-2">
       <CommentForm onSubmit={onReviewSubmit} />
       <ReviewList review={comments} />
-      <Pagination
-        postPerPage={reviewPerPage}
-        length={totalReviews}
-        handlePagination={handleClick}
-        currentPage={currentPage}
-      />
+      <div className="grid place-items-end">
+        <Pagination
+          postPerPage={reviewPerPage}
+          length={totalReviews}
+          handlePagination={handleClick}
+          currentPage={currentPage}
+        />
+      </div>
     </div>
   );
 }

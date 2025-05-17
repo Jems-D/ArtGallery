@@ -24,6 +24,7 @@ const ObjectProfilePage = (props: Props) => {
   const [personId, setPersonId] = useState<number>(0);
   const { objectid } = useParams<string>();
   const numObjectId = Number(objectid);
+  const [currentPage, setCurrentPage] = useState<string>("");
 
   interface CommentInputForm {
     title: string;
@@ -59,6 +60,10 @@ const ObjectProfilePage = (props: Props) => {
     }
   };
 
+  const handleNavClick = (e: string) => {
+    setCurrentPage(e);
+  };
+
   return (
     <div className="mt-10 mx-6">
       {typeof objInfo !== "undefined" && (
@@ -71,7 +76,10 @@ const ObjectProfilePage = (props: Props) => {
           <div className="flex mt-5 flex-col lg:flex-row">
             <div className="flex-1 flex-col mr-10">
               <section className="">
-                <InsideNavBar />
+                <InsideNavBar
+                  currentPage={currentPage}
+                  handleClick={handleNavClick}
+                />
                 <Outlet context={numObjectId} />
               </section>
             </div>

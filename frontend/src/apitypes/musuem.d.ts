@@ -98,3 +98,8 @@ export interface ReviewsPagination {
   pageNumber: number;
   reviews: Reviews[];
 }
+
+export interface Categories {
+  title: string;
+  image: string;
+}
