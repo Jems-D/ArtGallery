@@ -26,7 +26,7 @@ namespace api.Service
         }
 
 
-        public async Task<List<PropDTO.Record>?> FindProperties(PropSearchQuery searchQuery)
+        public async Task<CardInfoDTO.SearchResults<PropDTO.Record>> FindProperties(PropSearchQuery searchQuery)
         {
             try{
                 var result = await _httpClient.GetAsync($"https://api.harvardartmuseums.org/{searchQuery.property}?apikey={apiKey}&level=1&size=20&page={searchQuery.pageNumber}{(searchQuery.property != "person" ? "&sort=name&fields=id,name" : "&fields=displayname,personid")}");
@@ -35,7 +35,15 @@ namespace api.Service
                     var task = JsonConvert.DeserializeObject<PropDTO.Root>(content);
                     var records = task;
                     if(records != null){
-                        return records.ToRecordFromPropRoot()?.ToList();
+                        var results = new CardInfoDTO.SearchResults<PropDTO.Record>
+                        {
+                            pageNumber = searchQuery.pageNumber,
+                            totaCount = task.Info.TotalRecords,
+                            pageSize = 20,
+                            type= searchQuery.property,
+                            result = records.ToRecordFromPropRoot()?.ToList(),
+                        };
+                        return results;
                     }
                     
                 }
@@ -63,7 +71,7 @@ namespace api.Service
             }
         }
 
-        public async Task<List<CardInfoDTO.Record>?> GetArtWorks(ArtPieceSearchQuery searchQuery)
+        public async Task<CardInfoDTO.SearchResults<CardInfoDTO.Record>> GetArtWorks(ArtPieceSearchQuery searchQuery)
         {
             try{
                 var result = await _httpClient.GetAsync($"https://api.harvardartmuseums.org/object?apikey={apiKey}&{searchQuery.property}={searchQuery.Id}&size=20&page={searchQuery.pageNumber}&fields=objectid,title,primaryimageurl,technique,classification");
@@ -71,7 +79,15 @@ namespace api.Service
                     var content = await result.Content.ReadAsStringAsync();
                     var task = JsonConvert.DeserializeObject<CardInfoDTO.Root>(content);
                     if(task != null){
-                        return task.ToCardInfoFromRoot()?.ToList();
+                        var records = new CardInfoDTO.SearchResults<CardInfoDTO.Record>
+                        {
+                            pageNumber = searchQuery.pageNumber,
+                            pageSize = 20,
+                            totaCount = task.Info.TotalRecords,
+                            result = task.ToCardInfoFromRoot().ToList()
+                        };
+
+                        return records;
                     }
                 }
                 return null;
@@ -93,7 +109,7 @@ namespace api.Service
                             pageNumber = searchQuery.pageNumber,
                             totaCount = task.Info.TotalRecords,
                             pageSize = 20,
-                            artPieces = task.ToCardInfoFromRoot()?.ToList()
+                            result = task.ToCardInfoFromRoot()?.ToList()
                         };
                         return artPieces;
                     }

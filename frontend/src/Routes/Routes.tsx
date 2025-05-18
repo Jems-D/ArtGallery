@@ -12,6 +12,8 @@ import ObjectProfilePage from "../Pages/ObjectProfilePage";
 import Publications from "../Components/Publications/Publications";
 import Exhibitions from "../Components/Exhibitions/Exhibitions";
 import CategoriesPage from "../Pages/CategoriesPage";
+import CardList from "../Components/CardList/CardList";
+import CardArtworks from "../Components/CardList/CardArtworks";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "categories/:category",
         element: <CategoriesPage />,
+      },
+      {
+        path: "categories/:category/:id",
+        element: <CardArtworks />,
       },
       {
         path: "obj/:objectid",

@@ -54,16 +54,20 @@ const ObjectInformation = ({
         {objectInfo.description && (
           <p className="text-right text-wrap">{objectInfo.description}</p>
         )}
+        {objectInfo.people ? (
+          <>
+            {objectInfo.people.map((peope) => {
+              return (
+                peope.name && (
+                  <p key={`pepe--${peope.personId}`} className="text-right">
+                    Artist/s: {peope.name}
+                  </p>
+                )
+              );
+            })}
+          </>
+        ) : null}
 
-        {objectInfo.people.map((peope) => {
-          return (
-            peope.name && (
-              <p key={peope.personId} className="text-right">
-                Artist/s: {peope.name}
-              </p>
-            )
-          );
-        })}
         {relatedObjects.length ? (
           <div className="flex flex-col justify-end mt-5">
             <span className="text-sm text-right">Related works: </span>

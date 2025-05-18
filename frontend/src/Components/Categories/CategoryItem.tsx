@@ -10,7 +10,7 @@ interface Props {
 
 const CategoryItem = ({ category, property = "century" }: Props) => {
   property = CategoryImage(property);
-
+  const catgory = property.substring(34, property.indexOf("."));
   if ("title" in category) {
     return (
       <div
@@ -32,20 +32,22 @@ const CategoryItem = ({ category, property = "century" }: Props) => {
     <div
       className={`rounded-md font-serif border-1 p-10 grid place-items-center`}
     >
-      <h3
-        className={`text-3xl lg:text-9xl text-wrap text-center`}
-        id="text"
-        style={{
-          backgroundImage: `url(${property})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          WebkitBackgroundClip: "text",
-          backgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-        }}
-      >
-        {category.name}
-      </h3>
+      <Link to={`/categories/${catgory}/${category.id}`}>
+        <h3
+          className={`text-3xl lg:text-9xl text-wrap text-center`}
+          id="text"
+          style={{
+            backgroundImage: `url(${property})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          {category.name}
+        </h3>
+      </Link>
     </div>
   );
 };

@@ -62,7 +62,9 @@ namespace api.DTO.HarvardMusemApiDTOS
             public int totaCount { get; set; }
             public int pageSize { get; set; }
             public int pageNumber { get; set; }
-            public List<T>? artPieces { get; set; }    
+            public string? type { get; set; } = string.Empty;
+            public List<T>? result { get; set; }    
+
         }
 
     }

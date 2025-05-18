@@ -154,3 +154,21 @@ export const getCategories = async (pageNumber: number, property: string) => {
     handleError(err);
   }
 };
+
+export const getArtworksBasedOnCategory = async (
+  id: number,
+  pageNumber: number,
+  property: string
+) => {
+  try {
+    const artworks = await axios.get<SearchResultsPagination>(
+      `${museumUrl}/category/artpieces?Id=${id}&pageNumber=${pageNumber}&property=${property}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return artworks;
+  } catch (err: any) {
+    handleError(err);
+  }
+};

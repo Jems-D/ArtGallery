@@ -12,8 +12,8 @@ namespace api.Interfaces
 {
     public interface IHarvardMuseuemApiRepository
     {
-        Task<List<PropDTO.Record>?> FindProperties(PropSearchQuery searchQuery);
-        Task<List<CardInfoDTO.Record>?> GetArtWorks(ArtPieceSearchQuery searchQuery);
+        Task <CardInfoDTO.SearchResults<PropDTO.Record>> FindProperties(PropSearchQuery searchQuery);
+        Task<CardInfoDTO.SearchResults<CardInfoDTO.Record>> GetArtWorks(ArtPieceSearchQuery searchQuery);
         Task<ObjectMetadataDTO.Record?> GetObjectInformation(int objectId);
         Task<CardInfoDTO.SearchResults<CardInfoDTO.Record>?> GetArtworksBasedOnKeywords(KeywordSearchQuery searchQuery);
         Task<List<RelatedToDTO.RecordDTO>?> GetArtworkdsRelatedToObject(int objectId);
