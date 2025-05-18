@@ -11,6 +11,7 @@ import ForbiddenPage from "../Pages/ForbiddenPage";
 import ObjectProfilePage from "../Pages/ObjectProfilePage";
 import Publications from "../Components/Publications/Publications";
 import Exhibitions from "../Components/Exhibitions/Exhibitions";
+import CategoriesPage from "../Pages/CategoriesPage";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
             <SearchPage />
           </ProtectedRoutes>
         ),
+      },
+      {
+        path: "categories/:category",
+        element: <CategoriesPage />,
       },
       {
         path: "obj/:objectid",

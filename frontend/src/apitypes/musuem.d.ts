@@ -13,7 +13,7 @@ export interface SearchResultsPagination {
   totaCount: number;
   pageSize: number;
   pageNumber: number;
-  artPieces: SearchResults[];
+  result: SearchResults[];
 }
 
 //For object info
@@ -101,5 +101,19 @@ export interface ReviewsPagination {
 
 export interface Categories {
   title: string;
-  image: string;
+  image?: string;
+  id?: number;
+}
+
+export interface CategorySearch {
+  name: string | null;
+  id: number;
+}
+
+export interface CategoriesSearchResult {
+  totaCount: number;
+  pageSize: number;
+  pageNumber: number;
+  type: string;
+  result: CategorySearch[];
 }

@@ -14,6 +14,7 @@ import period from "../Components/Categories/Images/period.jpg";
 import person from "../Components/Categories/Images/person.jpg";
 import place from "../Components/Categories/Images/place.jpg";
 import technique from "../Components/Categories/Images/technique.jpg";
+import { Outlet } from "react-router-dom";
 
 type Props = {};
 
@@ -48,8 +49,8 @@ const SearchPage = (props: Props) => {
     const fetchResult = await searchResult(query, currentPage);
     console.log(fetchResult);
     if (fetchResult) {
-      if (Array.isArray(fetchResult.artPieces)) {
-        setResults(fetchResult.artPieces);
+      if (Array.isArray(fetchResult.result)) {
+        setResults(fetchResult.result);
         setTotalCount(fetchResult.totaCount);
         setPageSize(fetchResult.pageSize);
         setIsLoading(false);

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { handleError } from "../Helpers/ErrorHandler";
 import {
+  CategoriesSearchResult,
   Exhibitions,
   ObjectMetadata,
   OtherWorks,
@@ -135,6 +136,20 @@ export const getComments = async (objectId: number, pageNumber: number) => {
       }
     );
     return reviews;
+  } catch (err: any) {
+    handleError(err);
+  }
+};
+
+export const getCategories = async (pageNumber: number, property: string) => {
+  try {
+    const categories = await axios.get<CategoriesSearchResult>(
+      `${museumUrl}/category?pageNumber=${pageNumber}&property=${property}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return categories;
   } catch (err: any) {
     handleError(err);
   }

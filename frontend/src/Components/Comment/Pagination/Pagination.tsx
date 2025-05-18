@@ -19,6 +19,11 @@ const Pagination = ({
   for (let i = 1; i <= pageCount; i++) {
     paginationNumbers.push(i);
   }
+
+  if (pageCount === 1) {
+    return null;
+  }
+
   return (
     <div className="h-[100px]">
       {paginationNumbers.map((pageNumber) => {
