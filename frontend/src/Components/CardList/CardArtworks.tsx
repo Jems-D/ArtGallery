@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CardList from "./CardList";
 import { SearchResults } from "../../apitypes/musuem";
-import { getArtworksBasedOnCategory } from "../../Service/MuseumService";
+import {
+  addToFavorites,
+  getArtworksBasedOnCategory,
+} from "../../Service/MuseumService";
 import Pagination from "../Comment/Pagination/Pagination";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -39,11 +43,21 @@ const CardArtworks = (props: Props) => {
     setCurrentPage(e);
   };
 
+  const onPortfolioCreate = (e: any) => {
+    e.preventDefault();
+    addToFavorites(e.target[0].value).then((res) => {
+      if (res?.status === 204) {
+        toast.success("Successfully added to favourites");
+        console.log("hello added");
+      }
+    });
+  };
+
   return (
     <>
       {artWork.length ? (
-        <div className="mx-6 mt-10 mb-5">
-          <CardList cardInfo={artWork} />
+        <div className="mx-6 mt-10">
+          <CardList cardInfo={artWork} onPortfolioCreate={onPortfolioCreate} />
           <div className="grid place-items-end">
             <Pagination
               postPerPage={pageSize}

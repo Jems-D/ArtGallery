@@ -117,3 +117,9 @@ export interface CategoriesSearchResult {
   type: string;
   result: CategorySearch[];
 }
+
+export interface Favourites {
+  title: string | null;
+  imageUrl: string | null;
+  addedAt: string | null;
+}

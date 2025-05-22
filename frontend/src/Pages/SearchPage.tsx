@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import Search from "../Components/Search/Search";
-import { searchResult } from "../Service/MuseumService";
+import { addToFavorites, searchResult } from "../Service/MuseumService";
 import { Categories, SearchResults } from "../apitypes/musuem";
 import Skeleton from "react-loading-skeleton";
 import CardList from "../Components/CardList/CardList";
@@ -15,6 +15,7 @@ import person from "../Components/Categories/Images/person.jpg";
 import place from "../Components/Categories/Images/place.jpg";
 import technique from "../Components/Categories/Images/technique.jpg";
 import { Outlet } from "react-router-dom";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -97,6 +98,16 @@ const SearchPage = (props: Props) => {
     },
   ];
 
+  const onPortfolioCreate = (e: any) => {
+    e.preventDefault();
+    addToFavorites(e.target[0].value).then((res) => {
+      if (res?.status === 204) {
+        toast.success("Successfully added to favourites");
+        console.log("hello added");
+      }
+    });
+  };
+
   return (
     <div className="grid place-items-center mt-10">
       <Search
@@ -107,7 +118,10 @@ const SearchPage = (props: Props) => {
       <div className="mt-10 px-6 mb-10 w-[100vw]">
         {results?.length ? (
           <div className="flex flex-col gap-2">
-            <CardList cardInfo={results} />
+            <CardList
+              cardInfo={results}
+              onPortfolioCreate={onPortfolioCreate}
+            />
             <div className="grid place-items-end">
               <Pagination
                 postPerPage={pageSize}

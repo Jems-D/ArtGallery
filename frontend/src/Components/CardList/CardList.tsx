@@ -1,12 +1,13 @@
-import React from "react";
-import { SearchResults } from "../../apitypes/musuem";
+import React, { SyntheticEvent } from "react";
+import { Favourites, SearchResults } from "../../apitypes/musuem";
 import Card from "../Card/Card";
 
 interface Props {
-  cardInfo?: SearchResults[];
+  cardInfo?: SearchResults[] | Favourites[];
+  onPortfolioCreate: (e: SyntheticEvent) => void;
 }
 
-const CardList = ({ cardInfo }: Props) => {
+const CardList = ({ cardInfo, onPortfolioCreate }: Props) => {
   if (cardInfo === null || cardInfo === undefined) {
     return null;
   } else {
@@ -15,7 +16,7 @@ const CardList = ({ cardInfo }: Props) => {
         {cardInfo!.map((info, index) => {
           return (
             <li key={index} className="mb-5 w-fit break-inside-avoid">
-              <Card cardInfo={info} />
+              <Card cardInfo={info} onPortfolioCreate={onPortfolioCreate} />
             </li>
           );
         })}

@@ -3,6 +3,7 @@ import { handleError } from "../Helpers/ErrorHandler";
 import {
   CategoriesSearchResult,
   Exhibitions,
+  Favourites,
   ObjectMetadata,
   OtherWorks,
   Publications,
@@ -15,6 +16,7 @@ import {
 
 const museumUrl = import.meta.env.VITE_API_URL_MUSUEM_ENDPOINT;
 const reviewUrl = import.meta.env.VITE_API_URL_MUSUEM_REVIEW_ENDPOINT;
+const favUrl = import.meta.env.VITE_API_URL_MUSUEM_FAVORITE_ENDPOINT;
 
 export const searchResult = async (keyword: string, pageNumber: number) => {
   try {
@@ -168,6 +170,29 @@ export const getArtworksBasedOnCategory = async (
       }
     );
     return artworks;
+  } catch (err: any) {
+    handleError(err);
+  }
+};
+
+export const addToFavorites = async (objectId: number) => {
+  try {
+    const addFavs = await axios.post<void>(`${favUrl}/${objectId}`, null, {
+      withCredentials: true,
+    });
+    return addFavs;
+  } catch (err: any) {
+    handleError(err);
+  }
+};
+
+export const getAllFavourites = async () => {
+  try {
+    const favs = await axios.get<Favourites[]>(`${favUrl}`, {
+      withCredentials: true,
+    });
+
+    return favs;
   } catch (err: any) {
     handleError(err);
   }
