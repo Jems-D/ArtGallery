@@ -9,10 +9,11 @@ namespace api.DTO.ReviewDTOS
     {
         public string? Title { get; set; } = string.Empty;
         public string? Content { get; set; } = string.Empty;
-        public  decimal Rating { get; set; }
+        public decimal Rating { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
         public string? CreatedBy { get; set; }
         public int ArtPieceId { get; set; }
+        public int Id { get; set; }
 
     }
 }

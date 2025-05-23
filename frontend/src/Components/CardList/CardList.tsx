@@ -4,10 +4,17 @@ import Card from "../Card/Card";
 
 interface Props {
   cardInfo?: SearchResults[] | Favourites[];
-  onPortfolioCreate: (e: SyntheticEvent) => void;
+  onPortfolioCreate?: (e: SyntheticEvent) => void;
+  onFavDelete?: (e: SyntheticEvent) => void;
+  objectId?: number;
 }
 
-const CardList = ({ cardInfo, onPortfolioCreate }: Props) => {
+const CardList = ({
+  cardInfo,
+  onPortfolioCreate,
+  onFavDelete,
+  objectId,
+}: Props) => {
   if (cardInfo === null || cardInfo === undefined) {
     return null;
   } else {
@@ -16,7 +23,12 @@ const CardList = ({ cardInfo, onPortfolioCreate }: Props) => {
         {cardInfo!.map((info, index) => {
           return (
             <li key={index} className="mb-5 w-fit break-inside-avoid">
-              <Card cardInfo={info} onPortfolioCreate={onPortfolioCreate} />
+              <Card
+                cardInfo={info}
+                onPortfolioCreate={onPortfolioCreate}
+                onFavDelete={onFavDelete}
+                objectId={objectId}
+              />
             </li>
           );
         })}

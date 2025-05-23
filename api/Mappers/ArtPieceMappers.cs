@@ -56,10 +56,12 @@ namespace api.Mappers
         }
         public static ArtPieceFavDTO ToArtPieceFavFromArtPiece(this ArtPiece art)
         {
-            return new ArtPieceFavDTO{
+            return new ArtPieceFavDTO
+            {
                 Title = art.Title,
                 imageUrl = art.ImageUrl,
-                AddedAt = art.DateCreated
+                AddedAt = art.DateCreated,
+                objectId = (int)art.ObjectId,
             };
         }
     }

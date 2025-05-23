@@ -14,6 +14,7 @@ import Exhibitions from "../Components/Exhibitions/Exhibitions";
 import CategoriesPage from "../Pages/CategoriesPage";
 import CardList from "../Components/CardList/CardList";
 import CardArtworks from "../Components/CardList/CardArtworks";
+import NotFoundPage from "../Pages/NotFoundPage";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +50,7 @@ export const router = createBrowserRouter([
       { path: "register", element: <RegisterPage /> },
       { path: "unauthorized", element: <UnauthorizedPage /> },
       { path: "forbidden", element: <ForbiddenPage /> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);

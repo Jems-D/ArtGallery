@@ -1,6 +1,10 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import Search from "../Components/Search/Search";
-import { addToFavorites, searchResult } from "../Service/MuseumService";
+import {
+  addToFavorites,
+  removeFromFav,
+  searchResult,
+} from "../Service/MuseumService";
 import { Categories, SearchResults } from "../apitypes/musuem";
 import Skeleton from "react-loading-skeleton";
 import CardList from "../Components/CardList/CardList";
@@ -14,7 +18,7 @@ import period from "../Components/Categories/Images/period.jpg";
 import person from "../Components/Categories/Images/person.jpg";
 import place from "../Components/Categories/Images/place.jpg";
 import technique from "../Components/Categories/Images/technique.jpg";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 type Props = {};

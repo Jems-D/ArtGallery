@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import type { Reviews } from "../../apitypes/musuem";
-import { createComment, getComments } from "../../Service/MuseumService";
+import {
+  createComment,
+  deleteComment,
+  getComments,
+} from "../../Service/MuseumService";
 import CommentForm from "./CommentForm/CommentForm";
 import ReviewList from "./CommentList/ReviewList";
 import Pagination from "./Pagination/Pagination";
+import { toast } from "react-toastify";
 interface Props {
   objectId: number;
 }
@@ -51,10 +56,20 @@ function Review({ objectId }: Props) {
     setCurrentPage(pageNumber);
   };
 
+  const onCommentDelete = (e: any) => {
+    e.preventDefault();
+    deleteComment(e.target[0].value).then((res) => {
+      if (res?.status === 204) {
+        setRefreshKey((prev) => prev + 1);
+        toast.success("Comment Deleted");
+      }
+    });
+  };
+
   return (
     <div className="flex flex-col gap-2">
       <CommentForm onSubmit={onReviewSubmit} />
-      <ReviewList review={comments} />
+      <ReviewList review={comments} onCommentDelete={onCommentDelete} />
       <div className="grid place-items-end">
         <Pagination
           postPerPage={reviewPerPage}

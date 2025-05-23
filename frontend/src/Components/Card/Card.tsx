@@ -4,13 +4,23 @@ import privacy from "./privacy.svg";
 import { Link } from "react-router-dom";
 import FavForm from "../FavForm/FavForm";
 import { DateFormmater } from "../../Helpers/DateFormmater";
+import { removeFromFav } from "../../Service/MuseumService";
+import { toast } from "react-toastify";
 interface Props {
   cardInfo: SearchResults | Favourites;
   onPortfolioCreate?: (e: SyntheticEvent) => void;
+  onFavDelete?: (e: SyntheticEvent) => void;
+  objectId?: number;
 }
-const Card = ({ cardInfo, onPortfolioCreate }: Props) => {
+const Card = ({
+  cardInfo,
+  onPortfolioCreate,
+  onFavDelete,
+  objectId,
+}: Props) => {
   if ("addedAt" in cardInfo) {
     const date = cardInfo.addedAt?.substring(0, 10);
+
     return (
       <div className="rounded-md shadow-md p-3 w-full h-auto dark:bg-gray-900 grid">
         <img
@@ -29,6 +39,15 @@ const Card = ({ cardInfo, onPortfolioCreate }: Props) => {
         {date && (
           <p className="text-wrap place-self-start">{DateFormmater(date)}</p>
         )}
+        <div className="grid place-items-end">
+          {cardInfo.objectId && (
+            <FavForm
+              objectId={cardInfo.objectId}
+              onFavDelete={onFavDelete}
+              isFav={false}
+            />
+          )}
+        </div>
       </div>
     );
   }

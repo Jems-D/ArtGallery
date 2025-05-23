@@ -90,6 +90,7 @@ export interface Reviews {
   createdAt: string;
   createdBy: string;
   artPieceId: number;
+  id: number;
 }
 
 export interface ReviewsPagination {
@@ -122,4 +123,5 @@ export interface Favourites {
   title: string | null;
   imageUrl: string | null;
   addedAt: string | null;
+  objectId: number;
 }

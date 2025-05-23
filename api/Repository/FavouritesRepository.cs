@@ -45,6 +45,7 @@ namespace api.Repository
                             Title = s.ArtPiece.Title,
                             ImageUrl = s.ArtPiece.ImageUrl,
                             DateCreated = s.ArtPiece.DateCreated,
+                            ObjectId = s.ArtPiece.ObjectId
                         }).ToListAsync();
             return list;
         }

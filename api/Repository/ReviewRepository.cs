@@ -34,14 +34,16 @@ namespace api.Repository
 
             var reviews = _context.Reviews
                             .Include(a => a.User)
-                            .Select(a => new Reviews{
+                            .Select(a => new Reviews
+                            {
                                 Title = a.Title,
                                 Content = a.Content,
                                 Rating = a.Rating,
                                 CreatedAt = a.CreatedAt,
                                 ArtPieceId = a.ArtPieceId,
                                 CreatedBy = a.CreatedBy,
-                                ObjectId = a.ObjectId
+                                ObjectId = a.ObjectId,
+                                Id = a.Id
 
                             }).AsQueryable();
 

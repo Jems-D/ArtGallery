@@ -5,9 +5,11 @@ import { SearchResults } from "../../apitypes/musuem";
 import {
   addToFavorites,
   getArtworksBasedOnCategory,
+  removeFromFav,
 } from "../../Service/MuseumService";
 import Pagination from "../Comment/Pagination/Pagination";
 import { toast } from "react-toastify";
+import { number } from "yup";
 
 type Props = {};
 

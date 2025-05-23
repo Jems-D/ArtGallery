@@ -143,6 +143,17 @@ export const getComments = async (objectId: number, pageNumber: number) => {
   }
 };
 
+export const deleteComment = async (id: number) => {
+  try {
+    const deleted = await axios.delete(`${reviewUrl}/${id}`, {
+      withCredentials: true,
+    });
+    return deleted;
+  } catch (err: any) {
+    handleError(err);
+  }
+};
+
 export const getCategories = async (pageNumber: number, property: string) => {
   try {
     const categories = await axios.get<CategoriesSearchResult>(
@@ -193,6 +204,18 @@ export const getAllFavourites = async () => {
     });
 
     return favs;
+  } catch (err: any) {
+    handleError(err);
+  }
+};
+
+export const removeFromFav = async (objectId: number) => {
+  try {
+    const removedFromFav = await axios.delete<void>(`${favUrl}/${objectId}`, {
+      withCredentials: true,
+    });
+
+    return removedFromFav;
   } catch (err: any) {
     handleError(err);
   }

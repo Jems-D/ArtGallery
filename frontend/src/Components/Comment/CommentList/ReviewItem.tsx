@@ -1,13 +1,20 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import type { Reviews } from "../../../apitypes/musuem";
 import StarsRating from "../CommentForm/StarsRating";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
+import { useAuth } from "../../../Context/useAuth";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import CommentDeleteForm from "../CommentDeleteForm/CommentDeleteForm";
 
 interface Props {
   review: Reviews;
+  onCommentDelete: (e: SyntheticEvent) => void;
 }
 
-const ReviewItem = ({ review }: Props) => {
+const ReviewItem = ({ review, onCommentDelete }: Props) => {
+  const { user } = useAuth();
+  const username = user?.user;
+
   return (
     <>
       <div className="flex">
@@ -25,6 +32,14 @@ const ReviewItem = ({ review }: Props) => {
               }}
               isDisabled={true}
             />
+            <div className="ml-2">
+              {username === user?.user ? (
+                <CommentDeleteForm
+                  onCommentDelete={onCommentDelete}
+                  value={review.id}
+                />
+              ) : null}
+            </div>
           </div>
 
           <span className="text-sm opacity-90 font-serif">{review.title}</span>

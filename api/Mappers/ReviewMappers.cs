@@ -20,13 +20,15 @@ namespace api.Mappers
         }
 
         public static ReviewDTO ToReviewDTO(this Reviews reviews){
-            return new ReviewDTO{
+            return new ReviewDTO
+            {
                 Title = reviews.Title,
                 Content = reviews.Content,
                 Rating = reviews.Rating,
                 CreatedAt = reviews.CreatedAt,
                 CreatedBy = reviews.CreatedBy,
-                ArtPieceId = reviews.ArtPieceId
+                ArtPieceId = reviews.ArtPieceId,
+                Id = reviews.Id
             };
         }
     }

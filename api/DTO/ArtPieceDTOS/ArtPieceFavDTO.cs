@@ -10,5 +10,6 @@ namespace api.DTO.ArtPieceDTOS
         public string? Title { get; set; }
         public string? imageUrl { get; set; }
         public DateTime AddedAt { get; set; }
+        public int objectId { get; set; }
     }
 }
