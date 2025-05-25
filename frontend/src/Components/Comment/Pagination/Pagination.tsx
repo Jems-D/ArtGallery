@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from "react";
+import { getPageNumbers } from "../../../Helpers/PageFormatter";
 
 interface Props {
   postPerPage: number;
@@ -14,11 +15,14 @@ const Pagination = ({
   currentPage,
 }: Props) => {
   const pageCount = Math.ceil(length / postPerPage);
-  const paginationNumbers = [];
+  const paginationNumbers: (number | string)[] = getPageNumbers(
+    pageCount,
+    currentPage
+  );
 
-  for (let i = 1; i <= pageCount; i++) {
-    paginationNumbers.push(i);
-  }
+  // for (let i = 1; i <= pageCount; i++) {
+  //   paginationNumbers.push(i);
+  // }
 
   if (pageCount === 1) {
     return null;
@@ -32,7 +36,11 @@ const Pagination = ({
             className={`mr-1 outline-1 p-2 rounded-sm ${
               currentPage === pageNumber ? "bg-paledogwood" : ""
             } hover:outline-2`}
-            onClick={() => handlePagination(pageNumber)}
+            onClick={() => {
+              if (typeof pageNumber === "number") {
+                handlePagination(pageNumber);
+              }
+            }}
             key={`num-${pageNumber}`}
           >
             {pageNumber}
