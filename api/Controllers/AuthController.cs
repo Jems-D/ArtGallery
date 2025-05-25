@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Sprache;
 
 namespace api.Controllers
 {
@@ -39,11 +40,13 @@ namespace api.Controllers
         {
             var result = await _auth.LoginAsync(dto);
             if(result == null) return BadRequest("Invalid username or password");
-            var cookieOptions = new CookieOptions{
+            var cookieOptions = new CookieOptions
+            {
                 HttpOnly = true,
-                Secure = true, 
+                Secure = true,
                 SameSite = SameSiteMode.None,
-                Expires = DateTime.Now.AddDays(1)
+                Expires = DateTime.Now.AddDays(1),
+                Path = "/"
             };
                 Response.Cookies.Append("authToken", result.AccessToken, cookieOptions);
             
@@ -53,6 +56,23 @@ namespace api.Controllers
                 Id = result.Id
             });
         }
+
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            var cookieOption = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTime.Now.AddDays(-1),
+                Path = "/"
+            };
+            Response.Cookies.Append("authToken", "", cookieOption);
+
+            return Ok();
+        }
+
 
         [HttpGet("try")]
         [Authorize]
@@ -66,11 +86,13 @@ namespace api.Controllers
             var result = await _auth.RefreshTokensAsync(dto);
             if(result == null)  return BadRequest("Token still valid");
 
-            var cookieOptions = new CookieOptions{
+            var cookieOptions = new CookieOptions
+            {
                 HttpOnly = true,
                 Secure = true,
                 SameSite = SameSiteMode.None,   //using none will allow cross site origin for differnt front-end url
-                Expires = DateTime.Now.AddDays(1)
+                Expires = DateTime.Now.AddDays(1),
+                Path = "/"
             };
             Response.Cookies.Append("authToken", result.AccessToken, cookieOptions);
 

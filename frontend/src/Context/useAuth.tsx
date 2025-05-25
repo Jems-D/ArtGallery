@@ -2,11 +2,13 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   loginUserApi,
+  logoutUserApi,
   refreshTokenApi,
   registerUserApi,
 } from "../Service/AuthService";
 import React from "react";
 import { AccountData } from "../AuthTypes";
+import { toast } from "react-toastify";
 
 interface UserContextType {
   user: AccountData | null;
@@ -95,11 +97,14 @@ export const UserProvider = ({ children }: Props) => {
     return !!user; //negates into strict boolean meaning User does exist
   };
 
-  const logoutUser = () => {
-    setUser(null);
-    localStorage.setItem("isAuthenticated", JSON.stringify(false));
-    localStorage.removeItem("user");
-    navigate("/");
+  const logoutUser = async () => {
+    await logoutUserApi().then(() => {
+      setUser(null);
+      localStorage.setItem("isAuthenticated", JSON.stringify(false));
+      localStorage.removeItem("user");
+      navigate("/");
+      toast.success("Signed Out");
+    });
   };
 
   return (

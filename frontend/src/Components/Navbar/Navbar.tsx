@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  ArrowLeftCircleIcon,
   BookmarkIcon,
   MagnifyingGlassIcon,
   UserIcon,
@@ -18,6 +19,8 @@ const Navbar = (props: Props) => {
   if (hideNavbar.includes(location.pathname)) {
     return null;
   }
+
+  const { logoutUser, isAuthenticated } = useAuth();
 
   return (
     <header className="flex flex-row w-full mt-2 shadow-white-5">
@@ -39,10 +42,21 @@ const Navbar = (props: Props) => {
           <MagnifyingGlassIcon className="w-6 h-6 mx-auto  lg:w-8 sm:h-8 dark:text-white" />
           <span className="block h-1 bg-black dark:bg-white group-active:max-w-6 group-focus:max-w-6 max-w-0 mx-auto group-hover:max-w-6 transition-all duration-500 ease-in-out"></span>
         </Link>
-        <Link to="favs" className="group inline-block cursor-pointer">
+        <Link to="favs" className="group inline-block cursor-pointer mr-5">
           <BookmarkIcon className="w-6 h-6 mx-auto  lg:w-8 lg:h-8 dark:text-white" />
           <span className="block h-1 bg-black dark:bg-white max-w-0 mx-auto group-active:max-w-6 group-focus:max-w-6 group-hover:max-w-6 transition-all duration-500 ease-in-out"></span>
         </Link>
+        <div
+          className={`group cursor-pointer mr-5 ${
+            !isAuthenticated() ? "hidden" : "inline-block"
+          }`}
+        >
+          <ArrowLeftCircleIcon
+            className="w-6 h-6 lg:w-8 lg:h-8 dark:text-white"
+            onClick={logoutUser}
+          />
+          <span className="block h-1 bg-black dark:bg-white mx-auto max-w-0 group-hover:max-w-6 transition-all duration-500 ease-in-out" />
+        </div>
       </div>
     </header>
   );

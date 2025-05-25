@@ -49,3 +49,14 @@ export const refreshTokenApi = async (id: string) => {
     handleError(err);
   }
 };
+
+export const logoutUserApi = async () => {
+  try {
+    const result = await axios.post<void>(`${apiUrl}logout`, null, {
+      withCredentials: true,
+    });
+    return result;
+  } catch (err: any) {
+    handleError(err);
+  }
+};
