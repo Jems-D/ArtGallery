@@ -31,21 +31,40 @@ export const router = createBrowserRouter([
       },
       {
         path: "categories/:category",
-        element: <CategoriesPage />,
+        element: (
+          <ProtectedRoutes allowedRoles={["User"]}>
+            <CategoriesPage />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "categories/:category/:id",
-        element: <CardArtworks />,
+        element: (
+          <ProtectedRoutes allowedRoles={["User"]}>
+            <CardArtworks />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "obj/:objectid",
-        element: <ObjectProfilePage />,
+        element: (
+          <ProtectedRoutes allowedRoles={["User"]}>
+            <ObjectProfilePage />{" "}
+          </ProtectedRoutes>
+        ),
         children: [
           { path: "publications", element: <Publications /> },
           { path: "exhibitions", element: <Exhibitions /> },
         ],
       },
-      { path: "favs", element: <FavouritesPage /> },
+      {
+        path: "favs",
+        element: (
+          <ProtectedRoutes allowedRoles={["User"]}>
+            <FavouritesPage />
+          </ProtectedRoutes>
+        ),
+      },
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
       { path: "unauthorized", element: <UnauthorizedPage /> },

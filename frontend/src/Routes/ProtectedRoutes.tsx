@@ -4,7 +4,7 @@ import { Navigate, replace, useLocation } from "react-router-dom";
 import { all } from "axios";
 
 interface Props {
-  children: React.ReactElement;
+  children: React.ReactNode;
   allowedRoles: string[];
 }
 
